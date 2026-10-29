@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dhruv Suthar — Full Stack Developer</title>
+  <meta name="description" content="Dhruv Suthar, full stack developer from Udaipur. Builds web apps with React, Next.js, Node.js and TypeScript.">
+  <meta property="og:title" content="Dhruv Suthar — Full Stack Developer">
+  <meta property="og:description" content="Full stack developer building web apps with React, Next.js, Node.js and TypeScript.">
+  <meta property="og:url" content="https://ddhruvvv.tech">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23111'/><text x='50' y='68' font-size='56' text-anchor='middle' fill='%23fff' font-family='Arial'>D</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #16181d;
+      --muted: #5c6370;
+      --line: #e6e8ec;
+      --card: #f7f8fa;
+      --accent: #2f6fed;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0f1115;
+        --text: #e8eaee;
+        --muted: #9aa1ad;
+        --line: #252932;
+        --card: #161920;
+        --accent: #6b9bff;
+      }
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 16px/1.65 Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .wrap { max-width: 760px; margin: 0 auto; padding: 0 20px; }
+
+    nav {
+      position: sticky; top: 0; z-index: 10;
+      background: color-mix(in srgb, var(--bg) 88%, transparent);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--line);
+    }
+    nav .wrap { display: flex; justify-content: space-between; align-items: center; height: 56px; }
+    nav .logo { font-weight: 700; color: var(--text); }
+    nav ul { display: flex; gap: 20px; list-style: none; margin: 0; padding: 0; font-size: 14px; }
+    nav ul a { color: var(--muted); }
+    nav ul a:hover { color: var(--text); text-decoration: none; }
+
+    header { padding: 88px 0 56px; }
+    header .hi { color: var(--muted); margin: 0 0 6px; }
+    h1 { font-size: clamp(34px, 6vw, 48px); line-height: 1.15; margin: 0 0 14px; letter-spacing: -0.02em; }
+    header .lead { font-size: 19px; color: var(--muted); margin: 0 0 28px; max-width: 580px; }
+    .buttons { display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn {
+      display: inline-block; padding: 10px 18px; border-radius: 8px;
+      border: 1px solid var(--line); color: var(--text); font-weight: 500; font-size: 15px;
+    }
+    .btn.primary { background: var(--text); color: var(--bg); border-color: var(--text); }
+    .btn:hover { text-decoration: none; opacity: 0.85; }
+
+    section { padding: 48px 0; border-top: 1px solid var(--line); }
+    h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin: 0 0 20px; }
+    p { margin: 0 0 14px; }
+
+    .skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+    .skills h3 { font-size: 15px; margin: 0 0 8px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag {
+      font-size: 13px; padding: 3px 10px; border-radius: 999px;
+      background: var(--card); border: 1px solid var(--line); color: var(--text);
+    }
+
+    .projects { display: grid; gap: 16px; }
+    .project {
+      background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 22px;
+    }
+    .project.featured { border-color: var(--accent); }
+    .project .top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+    .project h3 { margin: 0 0 6px; font-size: 18px; }
+    .badge { font-size: 12px; color: var(--accent); font-weight: 600; }
+    .project p { color: var(--muted); margin: 0 0 12px; }
+    .project ul { color: var(--muted); margin: 0 0 12px; padding-left: 20px; }
+    .project .links { display: flex; gap: 16px; font-size: 14px; font-weight: 500; margin-top: 12px; }
+
+    .contact p { color: var(--muted); }
+    .contact .links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px; }
+
+    footer { padding: 32px 0 48px; color: var(--muted); font-size: 14px; border-top: 1px solid var(--line); }
+
+    @media (max-width: 560px) {
+      nav ul { gap: 14px; }
+      header { padding: 56px 0 40px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="wrap">
+      <a class="logo" href="#top">Dhruv Suthar</a>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="wrap" id="top">
+
+    <header>
+      <p class="hi">Hi, I'm</p>
+      <h1>Dhruv Suthar</h1>
+      <p class="lead">Full stack developer from Udaipur, Rajasthan. I build web apps with React, Next.js, Node.js and TypeScript, from the UI to the database and deployment.</p>
+      <div class="buttons">
+        <a class="btn primary" href="#projects">See my work</a>
+        <a class="btn" href="mailto:ddhruv8824@gmail.com">Email me</a>
+        <a class="btn" href="https://github.com/ddhruv8824" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </header>
+
+    <section id="about">
+      <h2>About</h2>
+      <p>I'm a full stack developer who likes building products people use every day. I started with the MERN stack (MongoDB, Express, React, Node.js) and now work mostly in TypeScript and Next.js.</p>
+      <p>Lately I've been building tools that use AI to do real work. My main project, Offerloop, finds jobs, tailors resumes and applies on the user's behalf, but only after they approve each step.</p>
+    </section>
+
+    <section id="skills">
+      <h2>Skills</h2>
+      <div class="skills">
+        <div>
+          <h3>Frontend</h3>
+          <div class="tags">
+            <span class="tag">React</span><span class="tag">Next.js</span><span class="tag">TypeScript</span>
+            <span class="tag">JavaScript</span><span class="tag">Svelte</span><span class="tag">HTML &amp; CSS</span>
+            <span class="tag">Tailwind CSS</span>
+          </div>
+        </div>
+        <div>
+          <h3>Backend</h3>
+          <div class="tags">
+            <span class="tag">Node.js</span><span class="tag">Express</span><span class="tag">Python</span>
+            <span class="tag">REST APIs</span><span class="tag">AI / LLM APIs</span>
+          </div>
+        </div>
+        <div>
+          <h3>Data &amp; DevOps</h3>
+          <div class="tags">
+            <span class="tag">MongoDB</span><span class="tag">PostgreSQL</span><span class="tag">Supabase</span>
+            <span class="tag">Docker</span><span class="tag">Git &amp; GitHub</span><span class="tag">Render</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2>Projects</h2>
+      <div class="projects">
+
+        <article class="project featured">
+          <div class="top">
+            <h3>Offerloop</h3>
+            <span class="badge">Featured</span>
+          </div>
+          <p>Your job switch, on autopilot, with you in charge. Offerloop finds roles that fit you every morning, asks before it does anything, applies for you and keeps your tracker, resume and interview prep in one place.</p>
+          <ul>
+            <li>Job finder that scores live roles from 30+ career pages against your profile</li>
+            <li>Daily automations that wait for your approval before applying</li>
+            <li>Resume Studio: tailors your resume to each job, with a second AI reviewing the edits</li>
+            <li>Tracker synced with Gmail, plus DSA prep for the companies you interview with</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">Next.js</span><span class="tag">TypeScript</span><span class="tag">Supabase</span>
+            <span class="tag">PostgreSQL</span><span class="tag">Docker</span><span class="tag">AI</span>
+          </div>
+          <div class="links">
+            <a href="https://github.com/ddhruv8824/offerloop" target="_blank" rel="noopener">Code →</a>
+          </div>
+        </article>
+
+        <article class="project">
+          <h3>Aria — AI Interviewer</h3>
+          <p>An AI interviewer for practising mock interviews.</p>
+          <div class="tags"><span class="tag">Python</span><span class="tag">AI</span></div>
+          <div class="links">
+            <a href="https://github.com/ddhruv8824/Aria-AI-Interviewer" target="_blank" rel="noopener">Code →</a>
+          </div>
+        </article>
+
+        <article class="project">
+          <h3>Direct Restaurant Ordering</h3>
+          <p>An MVP that lets restaurants take online orders directly from their customers.</p>
+          <div class="tags"><span class="tag">JavaScript</span></div>
+          <div class="links">
+            <a href="https://github.com/ddhruv8824/Direct-restaurant-ordering-MVP" target="_blank" rel="noopener">Code →</a>
+          </div>
+        </article>
+
+        <article class="project">
+          <h3>auth-svelte</h3>
+          <p>A small library that lets a Svelte 5 app show or hide parts of the UI based on the current user's permissions.</p>
+          <div class="tags"><span class="tag">Svelte 5</span><span class="tag">TypeScript</span></div>
+          <div class="links">
+            <a href="https://github.com/ddhruv8824/auth-svelte" target="_blank" rel="noopener">Code →</a>
+          </div>
+        </article>
+
+        <article class="project">
+          <h3>FitConnect</h3>
+          <p>A fitness community app to track progress and find workout buddies who share your goals, from yoga to weightlifting to running.</p>
+          <div class="tags"><span class="tag">MERN</span><span class="tag">JavaScript</span></div>
+          <div class="links">
+            <a href="https://github.com/ddhruv8824/Fitness_Buddy" target="_blank" rel="noopener">Code →</a>
+          </div>
+        </article>
+
+      </div>
+      <p style="margin-top:20px"><a href="https://github.com/ddhruv8824?tab=repositories" target="_blank" rel="noopener">More on GitHub →</a></p>
+    </section>
+
+    <section id="contact" class="contact">
+      <h2>Contact</h2>
+      <p>Open to full stack roles and interesting projects. The quickest way to reach me is email.</p>
+      <div class="links">
+        <a class="btn primary" href="mailto:ddhruv8824@gmail.com">ddhruv8824@gmail.com</a>
+        <a class="btn" href="https://github.com/ddhruv8824" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="wrap">© <span id="year">2026</span> Dhruv Suthar · ddhruvvv.tech</div>
+  </footer>
+
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>
