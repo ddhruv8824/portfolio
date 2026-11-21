@@ -148,6 +148,31 @@
     .xs-only { display: none; }
     @media (min-width: 480px) { .xs-only { display: inline; } }
 
+    /* Side motifs from Rajasthan in the empty margins: lantern, jharokha with diya, kites, lotus rangoli */
+    main { position: relative; }
+    main .container { position: relative; z-index: 1; }
+    .side { display: none; position: absolute; top: 0; bottom: 0; width: calc((100% - 704px) / 2); color: var(--foreground); opacity: .11; pointer-events: none; }
+    .dark .side { opacity: .14; }
+    @media (min-width: 1180px) { .side { display: block; } }
+    .side-l { left: 0; }
+    .side-r { right: 0; }
+    .ind { position: absolute; display: block; height: auto; }
+    .lantern { width: 64px; top: -72px; left: 56%; transform-origin: 50% 0; animation: swing 6s ease-in-out infinite alternate; }
+    .jharokha { width: 124px; top: 520px; left: 22%; }
+    .jharokha .flame { transform-box: fill-box; transform-origin: 50% 100%; animation: flicker 1.4s ease-in-out infinite alternate; }
+    .kites { width: 170px; top: 90px; right: 16%; overflow: visible; -webkit-mask-image: linear-gradient(#000 45%, transparent 95%); mask-image: linear-gradient(#000 45%, transparent 95%); }
+    .kites .kite { transform-box: fill-box; transform-origin: 50% 100%; animation: sway 5s ease-in-out infinite alternate; }
+    .kites .k2 { animation-duration: 7s; animation-delay: -2s; }
+    .kites .str { transform-box: fill-box; transform-origin: 100% 100%; animation: tug 5s ease-in-out infinite alternate; }
+    .kites .s2 { animation-duration: 7s; animation-delay: -2s; }
+    .rangoli { width: 132px; top: 640px; right: 30%; animation: turn 140s linear infinite; }
+    @keyframes swing { from { transform: rotate(-3deg); } to { transform: rotate(3deg); } }
+    @keyframes flicker { 0% { transform: scale(1, 1); } 50% { transform: scale(.9, 1.12) skewX(2deg); } 100% { transform: scale(1.05, .92) skewX(-2deg); } }
+    @keyframes sway { from { transform: rotate(-5deg) translateY(0); } to { transform: rotate(5deg) translateY(-6px); } }
+    @keyframes tug { from { transform: rotate(-1.2deg); } to { transform: rotate(1.2deg); } }
+    @keyframes turn { to { transform: rotate(360deg); } }
+    @media (prefers-reduced-motion: reduce) { .side, .side * { animation: none !important; } }
+
     /* Udaipur skyline above the footer: City Palace, Jag Mandir, Monsoon Palace, Lake Pichola */
     .skyline { color: var(--foreground); padding: 0 16px; pointer-events: none; }
     .udaipur { display: block; width: 100%; max-width: 1100px; height: auto; margin: 0 auto; opacity: .16;
@@ -197,6 +222,8 @@
   </header>
 
   <main>
+<div class="side side-l" aria-hidden="true"><svg class="ind lantern" viewBox="0 0 100 265" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M50 0V90"/><path transform="translate(0 90)" d="M50 0V70M38 70h24M36 70c0-8 6-14 14-16c8 2 14 8 14 16M50 54v-4M34 74h32l6 22-6 44H34l-6-44ZM28 96h44M42 74l-3 22 3 44M58 74l3 22-3 44M50 74v66M38 140h24l-4 8H42ZM50 148v8M46 156h8M47 156l-2 14M50 156v16M53 156l2 14"/></svg><svg class="ind jharokha" viewBox="0 0 140 270" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M20 214V110A50 50 0 0 1 120 110V214M14 60h112M18 60c8-22 30-34 52-38c22 4 44 16 52 38M70 22v-10M66 12h8M24 60v-6h92v6M28 214V110A9 9 0 0 0 30.5 95.6A9 9 0 0 0 37.8 83A9 9 0 0 0 49 73.6A9 9 0 0 0 62.7 68.6A9 9 0 0 0 77.3 68.6A9 9 0 0 0 91 73.6A9 9 0 0 0 102.2 83A9 9 0 0 0 109.5 95.6A9 9 0 0 0 112 110V214M8 214h124v6H8ZM14 220v28h112v-28M14 234l7-14 7 14-7 14ZM28 234l7-14 7 14-7 14ZM42 234l7-14 7 14-7 14ZM56 234l7-14 7 14-7 14ZM70 234l7-14 7 14-7 14ZM84 234l7-14 7 14-7 14ZM98 234l7-14 7 14-7 14ZM112 234l7-14 7 14-7 14ZM24 248q0 14 12 18M116 248q0 14-12 18M70 248v14M56 200h28q-2 10-14 10t-14-10Z"/><path class="flame" d="M70 198c-6-6-5-13 0-22c5 9 6 16 0 22Z"/></svg></div>
+<div class="side side-r" aria-hidden="true"><svg class="ind kites" viewBox="0 0 220 340" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><g class="kite k1"><path d="M60 20L90 60L60 108L30 60ZM60 20V108M30 60Q60 46 90 60M60 108l-6 8 12 0zM60 116q-10 16 2 30q12 14-2 30"/></g><path class="str s1" d="M60 108C66 180 120 240 210 340"/><g class="kite k2"><path d="M150 122.0L171.0 150L150 183.6L129.0 150ZM150 122.0V183.6M129.0 150Q150 140.2 171.0 150M150 183.6l-6 8 12 0z"/></g><path class="str s2" d="M150 184C150 240 170 290 214 340"/></svg><svg class="ind rangoli" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M186 100A86 86 0 1 1 14 100A86 86 0 1 1 186 100M120 100A20 20 0 1 1 80 100A20 20 0 1 1 120 100M108 100A8 8 0 1 1 92 100A8 8 0 1 1 108 100M120 100Q136 114 152 100Q136 86 120 100M114.1 114.1Q115.6 135.4 136.8 136.8Q135.4 115.6 114.1 114.1M100 120Q86 136 100 152Q114 136 100 120M85.9 114.1Q64.6 115.6 63.2 136.8Q84.4 135.4 85.9 114.1M80 100Q64 86 48 100Q64 114 80 100M85.9 85.9Q84.4 64.6 63.2 63.2Q64.6 84.4 85.9 85.9M100 80Q114 64 100 48Q86 64 100 80M114.1 85.9Q135.4 84.4 136.8 63.2Q115.6 64.6 114.1 85.9M127.7 111.5Q140.1 133.9 164.7 126.8Q152.3 104.4 127.7 111.5M111.5 127.7Q104.4 152.3 126.8 164.7Q133.9 140.1 111.5 127.7M88.5 127.7Q66.1 140.1 73.2 164.7Q95.6 152.3 88.5 127.7M72.3 111.5Q47.7 104.4 35.3 126.8Q59.9 133.9 72.3 111.5M72.3 88.5Q59.9 66.1 35.3 73.2Q47.7 95.6 72.3 88.5M88.5 72.3Q95.6 47.7 73.2 35.3Q66.1 59.9 88.5 72.3M111.5 72.3Q133.9 59.9 126.8 35.3Q104.4 47.7 111.5 72.3M127.7 88.5Q152.3 95.6 164.7 73.2Q140.1 66.1 127.7 88.5M178 100h0.01M172.1 129.8h0.01M155.2 155.2h0.01M129.8 172.1h0.01M100 178h0.01M70.2 172.1h0.01M44.8 155.2h0.01M27.9 129.8h0.01M22 100h0.01M27.9 70.2h0.01M44.8 44.8h0.01M70.2 27.9h0.01M100 22h0.01M129.8 27.9h0.01M155.2 44.8h0.01M172.1 70.2h0.01"/></svg></div>
     <div class="container">
       <section>
         <div class="avatar" aria-hidden="true">DS</div>
