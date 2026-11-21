@@ -4,618 +4,584 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Pulsora — Your AI CMO</title>
-<meta name="description" content="Pulsora is an AI Chief Marketing Officer. It learns your business, builds your strategy and runs a team of AI agents for SEO, AI search, content, social and community — then finds leads and books meetings.">
+<meta name="description" content="Pulsora is an AI Chief Marketing Officer. It researches your business, writes your strategy documents and runs a team of AI agents across SEO, AI search, content, social and communities. Then it finds leads and books meetings.">
 <meta property="og:title" content="Pulsora — Your AI CMO">
-<meta property="og:description" content="Marketing on autopilot. From first visitor to closed deal.">
+<meta property="og:description" content="Research, strategy and execution. Marketing on autopilot, from first visitor to closed deal.">
 <meta property="og:type" content="website">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%236a45f5'/%3E%3Cpath d='M5 17h5l3-7 5 13 3-6h6' stroke='white' stroke-width='2.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23111'/%3E%3Cpath d='M4 17h5l3-7 5 13 3-6h7' stroke='white' stroke-width='2.8' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#07070c;--bg2:#0d0d16;--panel:#12121c;--panel2:#181826;--line:#262638;--line2:#33334a;
-  --text:#f1f1f7;--muted:#9a9ab3;--dim:#6c6c86;
-  --brand:#7c5cff;--brand2:#a78bfa;--brand3:#5b3df0;--ok:#34d399;--warn:#fbbf24;--bad:#f87171;
-  --radius:16px;--max:1180px;
+  --bg:#ffffff;--soft:#fafafa;--soft2:#f4f4f5;--line:#e7e7e9;--line2:#d9d9de;
+  --text:#0a0a0a;--muted:#6b6b76;--dim:#9b9ba6;
+  --ok:#16a34a;--ok-bg:#ecfdf3;--warn:#b45309;--warn-bg:#fffbeb;
+  --max:1300px;
+  --sans:"Geist",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"Geist Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
-img,svg{display:block}
-.wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
-.serif{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-weight:400;letter-spacing:0}
-.grad{background:linear-gradient(100deg,#c4b5fd 0%,#7c5cff 45%,#38bdf8 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
-.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--brand2);letter-spacing:.02em}
-.eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--brand);box-shadow:0 0 12px var(--brand)}
-h2.title{font-size:clamp(30px,4.6vw,50px);line-height:1.08;letter-spacing:-.03em;font-weight:700;margin-top:14px}
-p.lead{color:var(--muted);font-size:clamp(16px,1.6vw,18px);max-width:640px;margin-top:16px}
-section{padding:110px 0;position:relative}
-.center{text-align:center}.center p.lead{margin-left:auto;margin-right:auto}
+svg{display:block}
+.mono{font-family:var(--mono)}
+.label{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+
+/* Page frame: thin vertical rails and "+" marks where sections meet */
+.frame{max-width:var(--max);margin:0 auto;border-left:1px solid var(--line);border-right:1px solid var(--line);position:relative}
+.sec{position:relative;border-top:1px solid var(--line)}
+.sec::before,.sec::after{content:"+";position:absolute;top:-11px;font:300 16px/1 var(--mono);color:var(--dim);background:var(--bg)}
+.sec::before{left:-6px}.sec::after{right:-6px}
+html{overflow-x:clip}
+@media(max-width:1320px){.sec::before,.sec::after{display:none}}
+.pad{padding:96px 56px}
+@media(max-width:760px){.pad{padding:64px 20px}}
 
 /* buttons */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:46px;padding:0 20px;border-radius:12px;font-weight:600;font-size:15px;border:1px solid transparent;cursor:pointer;transition:transform .15s,background .2s,border-color .2s;font-family:inherit;white-space:nowrap}
-.btn:hover{transform:translateY(-1px)}
-.btn-primary{background:linear-gradient(180deg,#8b6cff,#6a45f5);color:#fff;box-shadow:0 8px 30px -8px rgba(124,92,255,.7),inset 0 1px 0 rgba(255,255,255,.25)}
-.btn-ghost{background:rgba(255,255,255,.04);border-color:var(--line2);color:var(--text)}
-.btn-ghost:hover{background:rgba(255,255,255,.08)}
-.btn-sm{height:38px;padding:0 14px;font-size:14px;border-radius:10px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:42px;padding:0 18px;border-radius:9px;font:500 15px var(--sans);border:1px solid transparent;cursor:pointer;transition:background .15s,transform .15s;white-space:nowrap}
+.btn-dark{background:#111;color:#fff}.btn-dark:hover{background:#000}
+.btn-line{background:#fff;border-color:var(--line2)}.btn-line:hover{background:var(--soft)}
+.btn-sm{height:34px;padding:0 13px;font-size:13.5px;border-radius:8px}
 
-/* nav */
-nav.top{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(7,7,12,.72);border-bottom:1px solid rgba(255,255,255,.06)}
-nav.top .wrap{display:flex;align-items:center;height:66px;gap:28px}
-.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;letter-spacing:-.02em}
-.logo-mark{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,#8b6cff,#5b3df0);display:grid;place-items:center;box-shadow:0 0 20px rgba(124,92,255,.45)}
-.navlinks{display:flex;gap:24px;font-size:14px;color:var(--muted);margin-left:12px}
-.navlinks a:hover{color:var(--text)}
-.nav-cta{margin-left:auto;display:flex;gap:10px}
-.menu-btn{display:none;margin-left:auto;background:none;border:1px solid var(--line2);color:var(--text);border-radius:10px;width:40px;height:38px;font-size:18px;cursor:pointer}
-@media(max-width:900px){.navlinks,.nav-cta .btn-ghost{display:none}}
-@media(max-width:520px){.nav-cta{display:none}.menu-btn{display:block}
-  nav.top.open .navlinks{display:flex;position:absolute;top:66px;left:0;right:0;flex-direction:column;background:var(--bg2);padding:18px 20px;border-bottom:1px solid var(--line);margin:0}}
+/* announcement + nav */
+.announce{background:#0a0a0a;color:#fff;font:500 13px var(--mono);letter-spacing:.04em;display:flex;justify-content:center;align-items:center;gap:14px;padding:11px 16px;text-align:center;flex-wrap:wrap}
+.announce .dot{width:7px;height:7px;border-radius:50%;background:#4ade80;box-shadow:0 0 0 0 rgba(74,222,128,.6);animation:ping 1.8s infinite}
+.announce a{border-bottom:1px solid rgba(255,255,255,.5)}
+@keyframes ping{70%{box-shadow:0 0 0 7px rgba(74,222,128,0)}100%{box-shadow:0 0 0 0 rgba(74,222,128,0)}}
+nav.top{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.88);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+nav.top .in{max-width:var(--max);margin:0 auto;height:64px;display:flex;align-items:center;gap:36px;padding:0 24px}
+.logo{display:flex;align-items:center;gap:9px;font-weight:600;font-size:19px;letter-spacing:-.02em}
+.logo-mark{width:28px;height:28px;border-radius:7px;background:#111;display:grid;place-items:center}
+.links{display:flex;gap:28px;font-size:15px;color:#3f3f46}
+.links a:hover{color:#000}
+.nav-r{margin-left:auto;display:flex;gap:8px}
+@media(max-width:900px){.links{display:none}}
+@media(max-width:480px){.nav-r .btn-line{display:none}}
 
 /* hero */
-.hero{position:relative;padding:90px 0 70px;text-align:center;overflow:hidden}
-.hero::before{content:"";position:absolute;inset:-200px -20% auto;height:760px;background:radial-gradient(ellipse at 50% 30%,rgba(124,92,255,.35),transparent 60%),radial-gradient(ellipse at 80% 10%,rgba(56,189,248,.15),transparent 50%);pointer-events:none;z-index:-1}
-.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(ellipse at 50% 20%,#000 20%,transparent 70%);-webkit-mask-image:radial-gradient(ellipse at 50% 20%,#000 20%,transparent 70%);z-index:-1}
-.pill{display:inline-flex;align-items:center;gap:10px;padding:6px 14px 6px 6px;border-radius:999px;border:1px solid var(--line2);background:rgba(255,255,255,.03);font-size:13px;color:var(--muted)}
-.pill b{background:var(--brand);color:#fff;font-weight:600;border-radius:999px;padding:2px 10px;font-size:12px}
-.hero h1{font-size:clamp(40px,7.4vw,84px);line-height:1;letter-spacing:-.045em;font-weight:800;margin:26px auto 0;max-width:980px}
-.hero h1 .serif{font-size:1.08em}
-.hero p.lead{margin:24px auto 0;max-width:660px}
-.url-form{margin:36px auto 0;max-width:560px;display:flex;gap:8px;padding:7px;border-radius:16px;background:rgba(255,255,255,.04);border:1px solid var(--line2);box-shadow:0 20px 60px -20px rgba(124,92,255,.45)}
-.url-form input{flex:1;min-width:0;background:transparent;border:0;outline:0;color:var(--text);font:inherit;font-size:16px;padding:0 14px}
-.url-form input::placeholder{color:var(--dim)}
-.hero-note{margin-top:14px;font-size:13px;color:var(--dim)}
-.channels{margin-top:34px;display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
-.channel{display:flex;align-items:center;gap:8px;padding:7px 13px;border-radius:999px;background:rgba(255,255,255,.035);border:1px solid var(--line);font-size:13px;color:var(--muted)}
-.channel i{font-style:normal;width:18px;height:18px;border-radius:5px;display:grid;place-items:center;font-size:11px;font-weight:700;color:#fff}
-@media(max-width:520px){.url-form{flex-direction:column}.url-form input{height:46px}}
+.hero{text-align:center;padding:96px 24px 0}
+.badge{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--line2);border-radius:9px;padding:5px 12px 5px 5px;font-size:14px;color:#3f3f46;background:#fff}
+.badge b{font:500 11px var(--mono);letter-spacing:.08em;background:#111;color:#fff;border-radius:6px;padding:4px 8px;text-transform:uppercase}
+.hero h1{font-size:clamp(44px,7.2vw,86px);line-height:1;letter-spacing:-.045em;font-weight:600;margin:30px auto 0;max-width:900px}
+.hero .sub{font-size:clamp(17px,1.8vw,20px);color:var(--muted);margin:24px auto 0;max-width:600px}
+.url{display:flex;gap:6px;max-width:440px;margin:36px auto 0;padding:5px;border:1px solid var(--line2);border-radius:12px;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.04),0 8px 24px -12px rgba(0,0,0,.12)}
+.url input{flex:1;min-width:0;border:0;outline:0;font:16px var(--sans);padding:0 12px;color:var(--text);background:transparent}
+.url input::placeholder{color:var(--dim)}
+.note{margin-top:14px;font-size:13.5px;color:var(--dim)}
+.chips{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;max-width:860px;margin:18px auto 0}
+.chip{display:inline-flex;align-items:center;gap:7px;height:36px;padding:0 13px;border:1px solid var(--line);border-radius:9px;font-size:14px;background:#fff;color:#27272a}
+.chip.soon{color:var(--dim);border-style:dashed}
+.ic{width:18px;height:18px;border-radius:5px;display:grid;place-items:center;font:700 10px var(--sans);color:#fff;flex:none}
 
-/* product mock */
-.mock-wrap{margin:70px auto 0;max-width:1080px;perspective:2000px}
-.mock{border-radius:20px;border:1px solid var(--line2);background:linear-gradient(180deg,#141421,#0e0e17);box-shadow:0 50px 120px -30px rgba(124,92,255,.45),0 0 0 1px rgba(255,255,255,.03) inset;overflow:hidden;text-align:left;transform:rotateX(6deg);transform-origin:top;transition:transform .6s}
-.mock:hover{transform:rotateX(0)}
-.mock-bar{display:flex;align-items:center;gap:7px;padding:12px 16px;border-bottom:1px solid var(--line)}
-.mock-bar span{width:11px;height:11px;border-radius:50%;background:#2c2c3f}
-.mock-bar .url{margin:0 auto;font-size:12px;color:var(--dim);background:rgba(255,255,255,.04);padding:4px 40px;border-radius:7px}
-.mock-body{display:grid;grid-template-columns:200px 1fr 300px;min-height:460px}
-.m-side{border-right:1px solid var(--line);padding:18px 14px;font-size:13px}
-.m-side .co{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.06em}
-.m-side .coname{font-weight:600;margin:3px 0 16px}
-.m-nav div{padding:8px 10px;border-radius:8px;color:var(--muted);display:flex;justify-content:space-between;align-items:center}
-.m-nav div.on{background:rgba(124,92,255,.14);color:var(--text)}
-.m-nav em{font-style:normal;background:var(--brand);color:#fff;font-size:11px;border-radius:999px;padding:0 7px}
-.m-main{padding:20px;min-width:0}
-.m-h{font-weight:700;font-size:17px}
-.m-sub{font-size:12.5px;color:var(--dim);margin-top:2px}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px}
-.stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px}
-.stat b{font-size:22px;display:block;letter-spacing:-.02em}
-.stat small{font-size:11.5px;color:var(--dim)}
-.stat .up{color:var(--ok);font-size:11px;font-weight:600}
-.draft{margin-top:14px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px}
-.draft-top{display:flex;gap:8px;align-items:center;font-size:11px}
-.tag{border:1px solid var(--line2);border-radius:999px;padding:2px 8px;color:var(--muted)}
-.tag.pending{background:rgba(251,191,36,.12);border-color:transparent;color:var(--warn)}
-.draft h4{font-size:14px;margin:9px 0 4px}
-.draft p{font-size:12.5px;color:var(--muted)}
-.draft .why{font-size:11.5px;color:var(--brand2);margin-bottom:6px}
-.draft-actions{display:flex;gap:6px;margin-top:11px}
-.draft-actions span{font-size:11.5px;padding:5px 10px;border-radius:7px;border:1px solid var(--line2)}
-.draft-actions span.ok{background:var(--brand);border-color:var(--brand);color:#fff;font-weight:600}
-.m-feed{border-left:1px solid var(--line);padding:18px 16px;font-size:12.5px;min-width:0}
-.m-feed h5{font-size:12px;color:var(--dim);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;display:flex;align-items:center;gap:8px}
-.live{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 0 rgba(52,211,153,.6);animation:ping 1.6s infinite}
-@keyframes ping{70%{box-shadow:0 0 0 8px rgba(52,211,153,0)}100%{box-shadow:0 0 0 0 rgba(52,211,153,0)}}
-.feed-item{display:flex;gap:10px;padding:9px 0;border-bottom:1px dashed var(--line);opacity:0;transform:translateY(6px);animation:feedIn .5s forwards}
-.feed-item i{font-style:normal;flex:none;width:24px;height:24px;border-radius:7px;display:grid;place-items:center;font-size:11px;font-weight:700;color:#fff}
-.feed-item b{font-weight:600}
-.feed-item small{display:block;color:var(--dim);font-size:11px}
-@keyframes feedIn{to{opacity:1;transform:none}}
-.score-ring{display:flex;align-items:center;gap:12px;margin-top:14px;padding:12px;background:var(--panel);border:1px solid var(--line);border-radius:12px}
-@media(max-width:980px){.mock-body{grid-template-columns:1fr}.m-side,.m-feed{display:none}.stats{grid-template-columns:repeat(2,1fr)}.mock{transform:none}}
+/* app preview */
+.preview{margin:64px auto 0;max-width:1180px;border:1px solid var(--line);border-bottom:0;border-radius:16px 16px 0 0;overflow:hidden;text-align:left;background:#fff;box-shadow:0 -20px 60px -40px rgba(0,0,0,.25)}
+.ticker{background:#0a0a0a;color:#d4d4d8;font:12px var(--mono);display:flex;gap:28px;padding:10px 18px;white-space:nowrap;overflow:hidden}
+.ticker b{color:#fff;font-weight:500}
+.ticker .up{color:#4ade80}
+.app{display:grid;grid-template-columns:270px 1fr 300px;min-height:500px}
+.col{padding:18px;min-width:0}
+.col+.col{border-left:1px solid var(--line)}
+.ctx-h{display:flex;justify-content:space-between;font-weight:600;font-size:14px}
+.meta-row{display:flex;flex-wrap:wrap;gap:10px;font-size:11.5px;color:var(--muted);margin:8px 0}
+.ctx-p{font-size:12.5px;color:#3f3f46;line-height:1.5}
+.list-h{display:flex;align-items:center;gap:6px;font-weight:600;font-size:13px;margin:22px 0 8px}
+.count{font:11px var(--mono);background:var(--soft2);border-radius:5px;padding:1px 6px;color:var(--muted)}
+.doc{display:flex;align-items:center;gap:9px;font-size:13px;padding:7px 6px;border-radius:7px;color:#27272a}
+.doc:hover{background:var(--soft)}
+.doc svg{color:var(--dim)}
+.doc .st{margin-left:auto;width:7px;height:7px;border-radius:50%;background:var(--ok)}
+.comp{display:grid;grid-template-columns:1fr 1fr;gap:6px 10px;font-size:12.5px}
+.comp span{display:flex;align-items:center;gap:6px}
+.comp i{width:14px;height:14px;border-radius:4px;flex:none}
+.welcome{font-weight:600;font-size:17px}
+.today-h{display:flex;justify-content:space-between;align-items:center;margin:20px 0 10px;font-weight:600;font-size:14px}
+.prog{display:flex;align-items:center;gap:8px;font:11.5px var(--mono);color:var(--muted)}
+.bar{width:60px;height:4px;border-radius:9px;background:var(--soft2);overflow:hidden}
+.bar i{display:block;height:100%;width:33%;background:var(--ok);transition:width .4s}
+.task{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:10px;padding:9px 10px;margin-bottom:8px;font-size:13px;transition:opacity .3s,background .3s}
+.task .k{color:var(--dim);white-space:nowrap}
+.task .t{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;flex:1}
+.task .skip{font-size:12px;color:var(--muted);cursor:pointer}
+.task .go{background:#111;color:#fff;border:0;border-radius:7px;font:500 12px var(--sans);padding:6px 12px;cursor:pointer;min-width:62px}
+.task.done{background:var(--soft);opacity:.6}.task.done .go{background:var(--ok)}
+.agents-h{display:flex;justify-content:space-between;margin:22px 0 12px;font-weight:600;font-size:14px}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.tile{border:1px solid var(--line);border-radius:10px;padding:10px;text-align:center;font-size:12px}
+.tile .ic{margin:0 auto 6px;width:26px;height:26px;border-radius:7px;font-size:12px}
+.tile small{display:block;color:var(--dim);font-size:11px}
+.chat{display:flex;flex-direction:column;background:var(--soft)}
+.chat-h{font-size:13px;font-weight:600;border-bottom:1px solid var(--line);padding-bottom:10px}
+.chat-body{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:12px;padding:20px 6px}
+.chat-body p{font-size:13.5px;color:#3f3f46;max-width:230px}
+.sugg{display:flex;flex-wrap:wrap;justify-content:center;gap:6px}
+.sugg span{font-size:12px;border:1px solid var(--line2);background:#fff;border-radius:8px;padding:5px 9px}
+.ask{border:1px solid var(--line2);background:#fff;border-radius:10px;padding:10px 12px;font-size:12.5px;color:var(--dim);display:flex;justify-content:space-between}
+@media(max-width:1060px){.app{grid-template-columns:1fr 1fr}.chat{display:none}}
+@media(max-width:700px){.app{grid-template-columns:1fr}.app .col:first-child{display:none}.col+.col{border-left:0}.tiles{grid-template-columns:repeat(3,1fr)}.ticker{font-size:11px}}
 
-/* logos/trust strip */
-.strip{padding:40px 0 10px;text-align:center;color:var(--dim);font-size:13px}
-.strip-row{margin-top:18px;display:flex;flex-wrap:wrap;justify-content:center;gap:12px 34px;font-weight:600;color:#565670;font-size:15px}
+/* built-for grid */
+.grid5{display:grid;grid-template-columns:repeat(5,1fr)}
+.cell{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:30px 22px;text-align:center}
+.cell:nth-child(5n){border-right:0}
+.cell b{display:block;font-size:17px;font-weight:500}
+.cell small{display:block;margin-top:6px}
+.cell.lead{text-align:left;color:var(--muted);font-size:16px;background:var(--soft)}
+.cell.lead b{color:var(--text);display:inline;font-size:16px}
+@media(max-width:900px){.grid5{grid-template-columns:repeat(2,1fr)}.cell:nth-child(5n){border-right:1px solid var(--line)}.cell:nth-child(2n){border-right:0}.cell.lead{grid-column:1/-1;border-right:0}}
 
-/* problem */
-.cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:50px}
-.card{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line);border-radius:var(--radius);padding:26px}
-.card .big{font-size:40px;font-weight:800;letter-spacing:-.03em}
-.card h3{font-size:18px;margin:8px 0 6px;letter-spacing:-.01em}
-.card p{color:var(--muted);font-size:14.5px}
-@media(max-width:860px){.cards3{grid-template-columns:1fr}}
+/* section heads */
+.head{max-width:760px}
+.head h2{font-size:clamp(32px,4.4vw,52px);line-height:1.05;letter-spacing:-.035em;font-weight:600;margin-top:16px}
+.head p{font-size:18px;color:var(--muted);margin-top:18px;max-width:620px}
+.head.c{margin:0 auto;text-align:center}.head.c p{margin-left:auto;margin-right:auto}
 
-/* steps */
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:56px;counter-reset:s}
-.step{position:relative;padding:28px;border-radius:var(--radius);border:1px solid var(--line);background:var(--panel)}
-.step .n{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;font-weight:700;background:rgba(124,92,255,.15);color:var(--brand2);border:1px solid rgba(124,92,255,.35)}
-.step h3{margin:18px 0 8px;font-size:19px;letter-spacing:-.01em}
-.step p{color:var(--muted);font-size:14.5px}
-.step ul{margin-top:14px;list-style:none;display:grid;gap:7px;font-size:13.5px;color:var(--muted)}
-.step li::before{content:"✓";color:var(--ok);margin-right:8px;font-weight:700}
-@media(max-width:860px){.steps{grid-template-columns:1fr}}
+/* step 1 documents */
+.docs{display:grid;grid-template-columns:250px 1fr;margin-top:50px;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.docs-nav{border-right:1px solid var(--line);background:var(--soft);padding:10px}
+.dtab{display:block;width:100%;text-align:left;border:0;background:transparent;border-radius:8px;padding:11px 12px;font:14px var(--sans);color:#3f3f46;cursor:pointer}
+.dtab:hover{background:#fff}
+.dtab.on{background:#fff;color:#000;box-shadow:0 0 0 1px var(--line)}
+.dtab small{display:block;font:11px var(--mono);color:var(--dim);margin-top:2px}
+.dpane{display:none;padding:28px 34px;min-height:400px}
+.dpane.on{display:block;animation:fade .3s}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.dbar{display:flex;justify-content:space-between;gap:12px;font:12px var(--mono);color:var(--dim);border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:18px;flex-wrap:wrap}
+.dpane h3{font-size:22px;letter-spacing:-.02em;font-weight:600}
+.dpane h4{font:500 11.5px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:20px 0 8px}
+.dpane p,.dpane li{font-size:15px;color:#27272a}
+.dpane ul{padding-left:18px;display:grid;gap:5px}
+.kv{display:grid;grid-template-columns:160px 1fr;gap:8px 18px;margin-top:16px;font-size:14.5px}
+.kv dt{color:var(--muted)}
+.handoff{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:22px}
+.handoff span.f{font:12.5px var(--mono);border:1px solid var(--line);border-radius:7px;padding:6px 10px;background:#fff}
+@media(max-width:820px){.docs{grid-template-columns:1fr}.docs-nav{border-right:0;border-bottom:1px solid var(--line);display:flex;overflow-x:auto;gap:4px}.dtab{flex:none;width:auto}.dpane{padding:22px 20px}.kv{grid-template-columns:1fr}}
 
-/* agents */
-.agents{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:54px}
-.agent{padding:22px;border-radius:var(--radius);border:1px solid var(--line);background:var(--panel);transition:border-color .2s,transform .2s;position:relative;overflow:hidden}
-.agent:hover{border-color:rgba(124,92,255,.5);transform:translateY(-2px)}
-.agent .ico{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;font-weight:800;font-size:17px;color:#fff}
-.agent h3{font-size:16.5px;margin:16px 0 6px}
-.agent p{font-size:14px;color:var(--muted)}
-.agent .badge{position:absolute;top:18px;right:18px;font-size:11px;font-weight:600;padding:3px 9px;border-radius:999px}
-.badge.live-b{color:var(--ok);background:rgba(52,211,153,.1)}
-.badge.soon{color:var(--brand2);background:rgba(124,92,255,.14)}
-.agent.next{background:linear-gradient(160deg,rgba(124,92,255,.12),var(--panel) 55%);border-color:rgba(124,92,255,.3)}
-@media(max-width:960px){.agents{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:600px){.agents{grid-template-columns:1fr}}
+/* step 2 agents grid */
+.agrid{display:grid;grid-template-columns:repeat(4,1fr);margin-top:50px;border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.ag{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:26px 24px;display:flex;flex-direction:column;min-height:230px;transition:background .2s}
+.ag:hover{background:var(--soft)}
+.ag .n{font:12px var(--mono);color:var(--dim)}
+.ag .ic{width:34px;height:34px;border-radius:9px;font-size:14px;margin:18px 0 14px}
+.ag h3{font-size:17px;font-weight:600;letter-spacing:-.01em}
+.ag p{font-size:14px;color:var(--muted);margin-top:6px;flex:1}
+.ag .st{margin-top:16px;font:11.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ok)}
+.ag.soon .st{color:var(--dim)}
+.ag.soon{background:repeating-linear-gradient(135deg,#fff 0 10px,#fcfcfd 10px 20px)}
+@media(max-width:1000px){.agrid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.agrid{grid-template-columns:1fr}.ag{min-height:0}}
 
-/* demo tabs */
-.demo{margin-top:50px;display:grid;grid-template-columns:280px 1fr;gap:16px;text-align:left}
-.tabs{display:flex;flex-direction:column;gap:6px}
-.tab{display:flex;gap:12px;align-items:center;padding:14px;border-radius:12px;border:1px solid transparent;background:transparent;color:var(--muted);font:inherit;font-size:14.5px;cursor:pointer;text-align:left}
-.tab:hover{background:rgba(255,255,255,.03)}
-.tab.on{background:var(--panel);border-color:var(--line2);color:var(--text)}
-.tab i{font-style:normal;width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font-weight:700;font-size:13px;color:#fff;flex:none}
-.pane{display:none;background:var(--panel);border:1px solid var(--line2);border-radius:var(--radius);padding:24px;min-height:380px}
-.pane.on{display:block;animation:feedIn .35s}
-.pane .meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:12px;margin-bottom:14px}
-.pane h4{font-size:18px;letter-spacing:-.01em}
-.pane .ctx{margin-top:12px;padding:12px 14px;border-left:3px solid var(--line2);background:rgba(255,255,255,.02);border-radius:0 10px 10px 0;font-size:13.5px;color:var(--muted)}
-.pane .out{margin-top:14px;font-size:14.5px;white-space:pre-line;color:#dcdcea}
-.pane .acts{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap}
-.checks{display:grid;gap:8px;margin-top:14px;font-size:14px}
-.checks div{display:flex;gap:10px;align-items:baseline}
-.checks span.k{min-width:22px}
-pre.code{margin-top:12px;background:#05050a;border:1px solid var(--line);border-radius:10px;padding:14px;font-size:12.5px;color:#c4b5fd;overflow-x:auto;white-space:pre}
-.demo>*{min-width:0}
-@media(max-width:860px){.demo{grid-template-columns:1fr}.tabs{flex-direction:row;overflow-x:auto;padding-bottom:4px}.tab{flex:none;padding:10px 12px}}
+/* approval examples */
+.ex{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:50px}
+.card{border:1px solid var(--line);border-radius:14px;padding:20px;background:#fff;display:flex;flex-direction:column}
+.card .top{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--muted)}
+.pill{font:11px var(--mono);border-radius:6px;padding:3px 7px;background:var(--warn-bg);color:var(--warn);margin-left:auto}
+.card h4{font-size:15.5px;margin:12px 0 6px;letter-spacing:-.01em}
+.card .why{font-size:13px;color:var(--muted);margin-bottom:10px}
+.card .body{font-size:14px;color:#27272a;white-space:pre-line;flex:1}
+.card .acts{display:flex;gap:6px;margin-top:16px}
+@media(max-width:960px){.ex{grid-template-columns:1fr}}
+
+/* step 3 revenue */
+.rev{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center}
+.flow{display:grid;gap:10px}
+.fstep{display:flex;align-items:center;gap:14px;border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:#fff}
+.fstep .ic{width:32px;height:32px;border-radius:8px;font-size:13px}
+.fstep b{font-weight:600;font-size:15px}
+.fstep small{display:block;color:var(--muted);font-size:13px}
+.fstep .tag{margin-left:auto;font:11px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--dim);white-space:nowrap}
+.fstep.live .tag{color:var(--ok)}
+.arrow{text-align:center;color:var(--dim);font:14px var(--mono);line-height:1}
+@media(max-width:900px){.rev{grid-template-columns:1fr;gap:36px}}
 
 /* compare */
-.table-wrap{margin-top:50px;overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel)}
-table{width:100%;border-collapse:collapse;font-size:14.5px;min-width:680px}
-th,td{padding:15px 18px;text-align:left;border-bottom:1px solid var(--line)}
-th{font-size:13px;color:var(--muted);font-weight:600}
-th.us,td.us{background:rgba(124,92,255,.08)}
-th.us{color:var(--brand2)}
+.tbl{margin-top:44px;border:1px solid var(--line);border-radius:14px;overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:720px;font-size:15px}
+th,td{padding:15px 20px;border-bottom:1px solid var(--line);text-align:left}
+th{font:500 12px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);background:var(--soft)}
+td.us,th.us{background:#f6f6f7;font-weight:600}
+th.us{color:#000}
 tr:last-child td{border-bottom:0}
-td .y{color:var(--ok);font-weight:700}td .n{color:var(--dim)}
-
-/* roadmap */
-.road{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:56px;position:relative}
-.phase{padding:24px;border-radius:var(--radius);border:1px solid var(--line);background:var(--panel);position:relative}
-.phase.now{border-color:rgba(124,92,255,.55);box-shadow:0 0 40px -12px rgba(124,92,255,.6)}
-.phase .when{font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--dim)}
-.phase.now .when{color:var(--ok)}
-.phase h3{margin:10px 0 10px;font-size:18px}
-.phase ul{list-style:none;display:grid;gap:7px;font-size:13.5px;color:var(--muted)}
-.phase li::before{content:"→ ";color:var(--brand2)}
-@media(max-width:960px){.road{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:560px){.road{grid-template-columns:1fr}}
+.y{color:var(--ok)}.n{color:var(--dim)}
 
 /* pricing */
-.prices{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:54px;text-align:left}
-.price{padding:28px;border-radius:var(--radius);border:1px solid var(--line);background:var(--panel);display:flex;flex-direction:column}
-.price.pop{border-color:var(--brand);background:linear-gradient(170deg,rgba(124,92,255,.16),var(--panel) 50%);position:relative}
-.price.pop::after{content:"Most popular";position:absolute;top:-12px;left:28px;background:var(--brand);color:#fff;font-size:12px;font-weight:600;padding:3px 10px;border-radius:999px}
-.price h3{font-size:17px}
-.price .amt{font-size:44px;font-weight:800;letter-spacing:-.04em;margin:12px 0 2px}
-.price .amt small{font-size:15px;color:var(--muted);font-weight:500;letter-spacing:0}
-.price .for{font-size:14px;color:var(--muted)}
-.price ul{list-style:none;margin:20px 0 24px;display:grid;gap:9px;font-size:14px;flex:1}
-.price li::before{content:"✓";color:var(--ok);font-weight:700;margin-right:9px}
-@media(max-width:900px){.prices{grid-template-columns:1fr}}
+.prices{display:grid;grid-template-columns:repeat(3,1fr);margin-top:50px;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.price{padding:32px 28px;display:flex;flex-direction:column}
+.price+.price{border-left:1px solid var(--line)}
+.price.pop{background:var(--soft)}
+.price .lbl{display:flex;justify-content:space-between;align-items:center}
+.price .lbl b{font-size:17px;font-weight:600}
+.price .lbl span{font:11px var(--mono);letter-spacing:.08em;text-transform:uppercase;background:#111;color:#fff;border-radius:6px;padding:3px 8px}
+.amt{font-size:46px;font-weight:600;letter-spacing:-.04em;margin:18px 0 0}
+.amt small{font-size:15px;color:var(--muted);font-weight:400;letter-spacing:0}
+.price .for{color:var(--muted);font-size:14.5px}
+.price ul{list-style:none;display:grid;gap:10px;margin:24px 0 28px;font-size:14.5px;flex:1}
+.price li{display:flex;gap:10px}
+.price li::before{content:"✓";color:var(--ok);font-weight:700}
+@media(max-width:900px){.prices{grid-template-columns:1fr}.price+.price{border-left:0;border-top:1px solid var(--line)}}
 
 /* faq */
-.faq{max-width:780px;margin:46px auto 0;display:grid;gap:10px}
-details{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:0 20px}
-summary{cursor:pointer;list-style:none;padding:18px 0;font-weight:600;display:flex;justify-content:space-between;gap:16px}
+.faq{max-width:800px;margin:44px auto 0;border-top:1px solid var(--line)}
+details{border-bottom:1px solid var(--line)}
+summary{list-style:none;cursor:pointer;padding:22px 0;font-size:17px;font-weight:500;display:flex;justify-content:space-between;gap:20px}
 summary::-webkit-details-marker{display:none}
-summary::after{content:"+";color:var(--brand2);font-size:20px;line-height:1;transition:transform .2s}
+summary::after{content:"+";font:300 22px/1 var(--mono);color:var(--muted);transition:transform .2s}
 details[open] summary::after{transform:rotate(45deg)}
-details p{padding:0 0 18px;color:var(--muted);font-size:15px}
+details p{padding:0 0 22px;color:var(--muted);font-size:15.5px;max-width:700px}
 
-/* cta */
-.cta-box{border-radius:26px;padding:70px 30px;text-align:center;border:1px solid rgba(124,92,255,.35);background:radial-gradient(ellipse at 50% 0%,rgba(124,92,255,.35),transparent 65%),var(--bg2);overflow:hidden}
-.cta-box h2{font-size:clamp(32px,5vw,56px);letter-spacing:-.035em;line-height:1.05}
-footer{border-top:1px solid var(--line);padding:40px 0;color:var(--dim);font-size:14px}
-footer .wrap{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center}
-footer nav{display:flex;gap:20px;flex-wrap:wrap}
-footer a:hover{color:var(--text)}
+/* dark CTA + footer */
+.cta{background:#0a0a0a;color:#fff;text-align:center;padding:110px 24px}
+.cta .label{color:#a1a1aa}
+.cta h2{font-size:clamp(36px,5.6vw,68px);letter-spacing:-.04em;line-height:1;font-weight:600;margin-top:18px}
+.cta p{color:#a1a1aa;font-size:18px;margin:20px auto 0;max-width:520px}
+.cta .url{background:#141414;border-color:#2a2a2a;box-shadow:none}
+.cta .url input{color:#fff}
+.cta .btn-dark{background:#fff;color:#000}
+footer{border-top:1px solid #1f1f1f;background:#0a0a0a;color:#a1a1aa;font-size:14px}
+footer .in{max-width:var(--max);margin:0 auto;padding:30px 24px;display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center}
+footer nav{display:flex;flex-wrap:wrap;gap:22px}
+footer a:hover{color:#fff}
+footer .logo{color:#fff;font-size:17px}
+footer .logo-mark{background:#fff}
 
-.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s,transform .7s}
-.reveal.in{opacity:1;transform:none}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}.feed-item{opacity:1;transform:none}}
-.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,120px);background:var(--panel2);border:1px solid var(--line2);padding:12px 18px;border-radius:12px;font-size:14px;transition:transform .3s;z-index:99;max-width:calc(100% - 32px)}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,140px);background:#111;color:#fff;padding:12px 18px;border-radius:10px;font-size:14px;transition:transform .3s;z-index:99;max-width:calc(100% - 32px)}
 .toast.show{transform:translate(-50%,0)}
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .6s,transform .6s}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
 </style>
 </head>
 <body>
 
-<nav class="top" id="nav">
-  <div class="wrap">
-    <a href="#" class="logo" aria-label="Pulsora home">
-      <span class="logo-mark"><svg width="18" height="18" viewBox="0 0 32 32"><path d="M3 17h6l3-8 6 15 3-7h8" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-      Pulsora
-    </a>
-    <div class="navlinks">
-      <a href="#how">How it works</a>
+<div class="announce"><span class="dot"></span> PULSORA MVP IS LIVE — PHASE 1: YOUR AI MARKETING TEAM <a href="#revenue">See what’s next →</a></div>
+
+<nav class="top">
+  <div class="in">
+    <a href="#" class="logo" aria-label="Pulsora home"><span class="logo-mark"><svg width="16" height="16" viewBox="0 0 32 32"><path d="M3 17h6l3-8 6 15 3-7h8" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Pulsora</a>
+    <div class="links">
+      <a href="#research">How it works</a>
       <a href="#agents">Agents</a>
-      <a href="#demo">Live examples</a>
-      <a href="#vision">Vision</a>
+      <a href="#revenue">Revenue</a>
       <a href="#pricing">Pricing</a>
       <a href="#faq">FAQ</a>
     </div>
-    <div class="nav-cta">
-      <a href="#demo" class="btn btn-ghost btn-sm">See it work</a>
-      <a href="#start" class="btn btn-primary btn-sm">Get early access</a>
+    <div class="nav-r">
+      <a href="#research" class="btn btn-line btn-sm">See a demo</a>
+      <a href="#start" class="btn btn-dark btn-sm">Start free</a>
     </div>
-    <button class="menu-btn" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">☰</button>
   </div>
 </nav>
 
-<!-- HERO -->
-<header class="hero">
-  <div class="hero-grid"></div>
-  <div class="wrap">
-    <span class="pill"><b>New</b> Meet your AI Chief Marketing Officer</span>
-    <h1>Your marketing team,<br><span class="serif grad">on autopilot.</span></h1>
-    <p class="lead">Pulsora learns your business from your website, builds the strategy a CMO would, and runs a team of AI agents across SEO, AI search, content, social and communities. You just approve.</p>
+<div class="frame">
 
-    <form class="url-form" id="start" onsubmit="return startDemo(event)">
-      <input type="text" id="site" placeholder="Enter your website — e.g. yourcompany.com" aria-label="Your website" required>
-      <button class="btn btn-primary" type="submit">Hire my AI CMO →</button>
+  <!-- HERO -->
+  <header class="hero">
+    <span class="badge"><b>New</b> 5 strategy documents, written before a single post</span>
+    <h1>Meet Pulsora,<br>your AI CMO.</h1>
+    <p class="sub">It researches your business, writes the plan, and runs your marketing across every channel. You just approve.</p>
+    <form class="url" id="start" onsubmit="return start(event)">
+      <input type="text" placeholder="yourcompany.com" aria-label="Your website" required>
+      <button class="btn btn-dark" type="submit">Start free →</button>
     </form>
-    <p class="hero-note">Free strategy &amp; website audit · No credit card · Ready in 2 minutes</p>
+    <p class="note">Free strategy &amp; website audit · No credit card required</p>
 
-    <div class="channels">
-      <span class="channel"><i style="background:#16a34a">G</i>Google SEO</span>
-      <span class="channel"><i style="background:#7c5cff">✦</i>ChatGPT · Claude · Gemini</span>
-      <span class="channel"><i style="background:#000;border:1px solid #333">𝕏</i>X</span>
-      <span class="channel"><i style="background:#0a66c2">in</i>LinkedIn</span>
-      <span class="channel"><i style="background:#ff4500">r</i>Reddit</span>
-      <span class="channel"><i style="background:#ff6600">Y</i>Hacker News</span>
-      <span class="channel"><i style="background:#334155">✍</i>Blog</span>
+    <p class="label" style="margin-top:46px">8 marketing agents on duty · 4 more in training</p>
+    <div class="chips">
+      <span class="chip"><i class="ic" style="background:#ff4500">r</i>Reddit</span>
+      <span class="chip"><i class="ic" style="background:#16a34a">G</i>SEO</span>
+      <span class="chip"><i class="ic" style="background:#7c3aed">✦</i>GEO</span>
+      <span class="chip"><i class="ic" style="background:#334155">✍</i>Writer</span>
+      <span class="chip"><i class="ic" style="background:#0ea5e9">&lt;/&gt;</i>Site fixes</span>
+      <span class="chip"><i class="ic" style="background:#ff6600">Y</i>Hacker News</span>
+      <span class="chip"><i class="ic" style="background:#111">𝕏</i>X</span>
+      <span class="chip"><i class="ic" style="background:#0a66c2">in</i>LinkedIn</span>
+      <span class="chip soon"><i class="ic" style="background:#db2777">◉</i>Leads</span>
+      <span class="chip soon"><i class="ic" style="background:#d97706">☎</i>AI Calls</span>
     </div>
 
-    <!-- PRODUCT MOCK -->
-    <div class="mock-wrap reveal">
-      <div class="mock" role="img" aria-label="Preview of the Pulsora dashboard">
-        <div class="mock-bar"><span></span><span></span><span></span><div class="url">app.pulsora.ai/acme</div></div>
-        <div class="mock-body">
-          <div class="m-side">
-            <div class="co">Company</div>
-            <div class="coname">Acme Analytics</div>
-            <div class="m-nav">
-              <div>Overview</div>
-              <div>Agents</div>
-              <div class="on">Approval queue <em>12</em></div>
-              <div>Website audit</div>
-              <div>Strategy</div>
-              <div style="opacity:.5">Leads <em style="background:#33334a">soon</em></div>
-            </div>
+    <!-- APP PREVIEW -->
+    <div class="preview" role="img" aria-label="Preview of the Pulsora app">
+      <div class="ticker"><span>● <b>38</b> agent runs today</span><span>Visitors <b>3.4K</b> <span class="up">↑ 38%</span></span><span>AI citations <b>12</b> <span class="up">↑ 9</span></span><span>Site score <b>91</b> <span class="up">↑ 27</span></span><span>Drafts approved <b>48</b></span><span>Leads <b>—</b> soon</span></div>
+      <div class="app">
+        <div class="col">
+          <div class="ctx-h">Context <span class="mono" style="color:var(--dim);font-weight:400;font-size:12px">acme.com</span></div>
+          <div class="meta-row"><span>◷ SaaS</span><span>👥 11–50</span><span>𝕏 @acme</span></div>
+          <p class="ctx-p">Acme is a product-analytics tool for early-stage SaaS teams. It shows where users drop off and what drives activation, with no data engineer needed.</p>
+          <div class="list-h">Documents <span class="count">5</span></div>
+          <div id="ctxDocs"></div>
+          <div class="list-h">Competitors <span class="count">4</span></div>
+          <div class="comp">
+            <span><i style="background:#7c3aed"></i>mixpanel.com</span>
+            <span><i style="background:#f59e0b"></i>amplitude.com</span>
+            <span><i style="background:#1d4ed8"></i>posthog.com</span>
+            <span><i style="background:#ef4444"></i>heap.io</span>
           </div>
-          <div class="m-main">
-            <div class="m-h">Good morning 👋</div>
-            <div class="m-sub">Your agents worked overnight. 12 drafts are waiting for you.</div>
-            <div class="stats">
-              <div class="stat"><b>12</b><small>Awaiting approval</small></div>
-              <div class="stat"><b>48</b><small>Published this month</small></div>
-              <div class="stat"><b>3.4k</b><small>Visitors <span class="up">▲ 38%</span></small></div>
-              <div class="stat"><b>91</b><small>Website score <span class="up">▲ 27</span></small></div>
-            </div>
-            <div class="draft">
-              <div class="draft-top"><span class="tag">Reddit · r/SaaS</span><span class="tag pending">pending</span><span style="margin-left:auto;color:var(--dim)">2 min ago</span></div>
-              <h4>Reply: “What’s the cheapest way to track product analytics?”</h4>
-              <div class="why">💡 Founder asking for exactly what you solve · 142 upvotes</div>
-              <p>Honestly, for early-stage you don’t need a $500/mo tool. Track 5 events max: signup, activation, first value moment… (I work on Acme, happy to share our template.)</p>
-              <div class="draft-actions"><span class="ok">✓ Approve</span><span>Edit</span><span>Reject</span></div>
-            </div>
-            <div class="draft">
-              <div class="draft-top"><span class="tag">Blog · SEO</span><span class="tag pending">pending</span></div>
-              <h4>Product analytics for startups: the 2026 guide</h4>
-              <div class="why">💡 Targets “product analytics for startups” · 2.9k searches/mo</div>
-            </div>
+        </div>
+        <div class="col">
+          <div class="welcome">Good morning, founder.</div>
+          <div style="font-size:13px;color:var(--muted)">Your agents worked overnight. Approve, edit, or skip.</div>
+          <div class="today-h">Today <span class="prog"><span class="bar"><i id="bar"></i></span><span id="progTxt">1 of 4 done</span></span></div>
+          <div id="tasks"></div>
+          <div class="agents-h">Agents <span class="mono" style="color:var(--dim);font-weight:400;font-size:12px">8 running</span></div>
+          <div class="tiles">
+            <div class="tile"><i class="ic" style="background:#7c3aed">✦</i>GEO<small>12 citations</small></div>
+            <div class="tile"><i class="ic" style="background:#ff4500">r</i>Reddit<small>4 replies</small></div>
+            <div class="tile"><i class="ic" style="background:#16a34a">G</i>SEO<small>3 fixes</small></div>
+            <div class="tile"><i class="ic" style="background:#334155">✍</i>Writer<small>2 articles</small></div>
+            <div class="tile"><i class="ic" style="background:#0a66c2">in</i>LinkedIn<small>6 posts</small></div>
+            <div class="tile"><i class="ic" style="background:#111">𝕏</i>X<small>9 posts</small></div>
+            <div class="tile"><i class="ic" style="background:#ff6600">Y</i>HN<small>1 draft</small></div>
+            <div class="tile"><i class="ic" style="background:#0ea5e9">&lt;/&gt;</i>Site<small>score 91</small></div>
           </div>
-          <div class="m-feed">
-            <h5><span class="live"></span> Agents working</h5>
-            <div id="feed"></div>
+        </div>
+        <div class="col chat">
+          <div class="chat-h">💬 Ask your CMO</div>
+          <div class="chat-body">
+            <span class="logo-mark" style="width:38px;height:38px;border-radius:10px"><svg width="20" height="20" viewBox="0 0 32 32"><path d="M3 17h6l3-8 6 15 3-7h8" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <p>I’ve read your site and written your strategy. Where should we grow first?</p>
+            <div class="sugg"><span>Plan my next 30 days</span><span>Who is my best customer?</span><span>Beat Mixpanel on SEO</span></div>
           </div>
+          <div class="ask">Ask anything… <span>↑</span></div>
         </div>
       </div>
     </div>
-  </div>
-</header>
+  </header>
 
-<!-- PROBLEM -->
-<section id="problem">
-  <div class="wrap center reveal">
-    <span class="eyebrow">The problem</span>
-    <h2 class="title">Great products die quietly<br>because <span class="serif grad">nobody hears about them.</span></h2>
-    <p class="lead">Founders build. Then they’re told to “do marketing”: SEO, content, socials, communities and now AI search. That’s a full team’s job, and most early companies can’t afford one.</p>
+  <!-- BUILT FOR -->
+  <div class="sec grid5">
+    <div class="cell lead">Built for <b>teams with a great product</b> and no time to market it</div>
+    <div class="cell"><b>SaaS founders</b><small class="label">B2B · B2C</small></div>
+    <div class="cell"><b>D2C brands</b><small class="label">E-commerce</small></div>
+    <div class="cell"><b>Agencies</b><small class="label">Multi-brand</small></div>
+    <div class="cell"><b>Local business</b><small class="label">Services</small></div>
   </div>
-  <div class="wrap cards3">
-    <div class="card reveal"><div class="big grad">$200k+</div><h3>A real CMO</h3><p>Yearly cost of an experienced marketing leader, before you hire anyone to actually execute.</p></div>
-    <div class="card reveal"><div class="big grad">$5–10k</div><h3>Per month for an agency</h3><p>Slow, generic and locked into retainers. Results take months, and the knowledge leaves with them.</p></div>
-    <div class="card reveal"><div class="big grad">10+</div><h3>Channels to master</h3><p>Google, ChatGPT, LinkedIn, X, Reddit, HN, blogs, email… Each one has its own rules, tone and timing.</p></div>
-  </div>
-</section>
 
-<!-- HOW -->
-<section id="how" style="background:linear-gradient(180deg,transparent,var(--bg2) 30%,transparent)">
-  <div class="wrap center reveal">
-    <span class="eyebrow">How it works</span>
-    <h2 class="title">From URL to a running<br>marketing machine in <span class="serif grad">minutes.</span></h2>
-  </div>
-  <div class="wrap steps">
-    <div class="step reveal"><div class="n">1</div><h3>Drop in your website</h3><p>Pulsora reads your site like a new CMO on day one: product, pricing, positioning, audience and competitors.</p><ul><li>Crawls your key pages</li><li>Add your goals in plain words</li></ul></div>
-    <div class="step reveal"><div class="n">2</div><h3>Get your strategy</h3><p>In about 2 minutes you get a complete go-to-market plan, plus a technical SEO and AI-search audit of your site.</p><ul><li>Buyer personas &amp; pain points</li><li>Keywords, communities, channel plan</li><li>Site score with ready-to-paste fixes</li></ul></div>
-    <div class="step reveal"><div class="n">3</div><h3>Agents execute, you approve</h3><p>Specialised agents draft articles, posts and community replies every day. Approve in one click. Nothing goes out without you.</p><ul><li>Daily approval queue</li><li>Edit, approve or reject</li><li>Learns from your feedback</li></ul></div>
-  </div>
-</section>
-
-<!-- AGENTS -->
-<section id="agents">
-  <div class="wrap center reveal">
-    <span class="eyebrow">Your AI marketing team</span>
-    <h2 class="title">One CMO. <span class="serif grad">A whole team</span> of agents.</h2>
-    <p class="lead">Each agent is a specialist trained for one channel, and all of them share the same understanding of your business.</p>
-  </div>
-  <div class="wrap agents">
-    <div class="agent reveal"><span class="badge live-b">Live</span><div class="ico" style="background:linear-gradient(135deg,#7c5cff,#4f46e5)">◎</div><h3>CMO Strategist</h3><p>Turns your website into personas, positioning, keywords, a channel plan and a weekly action plan.</p></div>
-    <div class="agent reveal"><span class="badge live-b">Live</span><div class="ico" style="background:linear-gradient(135deg,#22c55e,#15803d)">G</div><h3>SEO Auditor</h3><p>Runs 14 technical checks every day and writes the exact fixes: titles, meta tags, schema and more.</p></div>
-    <div class="agent reveal"><span class="badge live-b">Live</span><div class="ico" style="background:linear-gradient(135deg,#a78bfa,#7c3aed)">✦</div><h3>GEO · AI Search</h3><p>Gets you recommended by ChatGPT, Claude, Gemini and Perplexity with AI-ready FAQs and an llms.txt file.</p></div>
-    <div class="agent reveal"><span class="badge live-b">Live</span><div class="ico" style="background:linear-gradient(135deg,#475569,#1e293b)">✍</div><h3>Content Writer</h3><p>Writes long-form SEO articles for keywords with real buying intent, in your brand voice.</p></div>
-    <div class="agent reveal"><span class="badge live-b">Live</span><div class="ico" style="background:linear-gradient(135deg,#ff6a2b,#ff4500)">r</div><h3>Reddit Scout</h3><p>Finds threads where people ask for what you sell and drafts genuinely helpful, transparent replies.</p></div>
-    <div class="agent reveal"><span class="badge live-b">Live</span><div class="ico" style="background:linear-gradient(135deg,#ff8a3d,#ff6600)">Y</div><h3>Hacker News</h3><p>Watches relevant HN discussions, drafts thoughtful comments and plans your Show HN launch.</p></div>
-    <div class="agent reveal"><span class="badge live-b">Live</span><div class="ico" style="background:linear-gradient(135deg,#3b82f6,#0a66c2)">in</div><h3>LinkedIn Ghostwriter</h3><p>Founder-led posts that build authority: stories, how-tos and lessons, with hooks that stop the scroll.</p></div>
-    <div class="agent reveal"><span class="badge live-b">Live</span><div class="ico" style="background:linear-gradient(135deg,#3f3f46,#000)">𝕏</div><h3>X Creator</h3><p>Daily posts and threads in your voice, built around your content pillars.</p></div>
-    <div class="agent next reveal"><span class="badge soon">Coming next</span><div class="ico" style="background:linear-gradient(135deg,#f472b6,#db2777)">◉</div><h3>Lead Hunter</h3><p>Turns buying signals across the web into named prospects, enriched with role, company and contact.</p></div>
-    <div class="agent next reveal"><span class="badge soon">Coming next</span><div class="ico" style="background:linear-gradient(135deg,#38bdf8,#0284c7)">✉</div><h3>Outreach Agent</h3><p>Personalised email sequences that reference why each lead is a fit, with reply detection.</p></div>
-    <div class="agent next reveal"><span class="badge soon">Coming next</span><div class="ico" style="background:linear-gradient(135deg,#fbbf24,#d97706)">☎</div><h3>AI Voice Caller</h3><p>Calls warm, opted-in leads, qualifies them, handles objections and books meetings on your calendar.</p></div>
-    <div class="agent next reveal"><span class="badge soon">Coming next</span><div class="ico" style="background:linear-gradient(135deg,#34d399,#059669)">$</div><h3>Revenue Tracker</h3><p>A built-in pipeline that shows which channel, post and conversation turned into revenue.</p></div>
-  </div>
-</section>
-
-<!-- DEMO -->
-<section id="demo" style="background:linear-gradient(180deg,transparent,var(--bg2) 25%,var(--bg2) 75%,transparent)">
-  <div class="wrap center reveal">
-    <span class="eyebrow">Real examples</span>
-    <h2 class="title">See what lands in your<br><span class="serif grad">approval queue.</span></h2>
-    <p class="lead">Sample drafts for “Acme Analytics”, a fictional product-analytics startup. Your drafts are written for your business.</p>
-  </div>
-  <div class="wrap demo reveal">
-    <div class="tabs" role="tablist">
-      <button class="tab on" data-t="t1" role="tab"><i style="background:#7c5cff">◎</i>Strategy</button>
-      <button class="tab" data-t="t2" role="tab"><i style="background:#ff4500">r</i>Reddit reply</button>
-      <button class="tab" data-t="t3" role="tab"><i style="background:#0a66c2">in</i>LinkedIn post</button>
-      <button class="tab" data-t="t4" role="tab"><i style="background:#16a34a">G</i>Website audit</button>
-      <button class="tab" data-t="t5" role="tab"><i style="background:#7c3aed">✦</i>AI search (GEO)</button>
+  <!-- STEP 1 -->
+  <section class="sec pad" id="research">
+    <div class="head reveal">
+      <div class="label">Step 1 — Research</div>
+      <h2>Pulsora researches first and writes the plan everything runs on.</h2>
+      <p>Before any agent drafts a word, your AI CMO reads your site, studies your competitors and writes five strategy documents, just like a new CMO in their first week.</p>
     </div>
-    <div>
-      <div class="pane on" id="t1">
-        <div class="meta"><span class="tag">CMO Strategist</span><span style="color:var(--dim)">Generated from 5 pages of acme.com</span></div>
-        <h4>Go-to-market plan · Acme Analytics</h4>
-        <div class="checks">
-          <div><span class="k">🎯</span><span><b>Audience:</b> seed–Series A SaaS teams with no data engineer</span></div>
-          <div><span class="k">👤</span><span><b>Personas:</b> Technical founder · First PM · Growth marketer</span></div>
-          <div><span class="k">🔑</span><span><b>Keywords:</b> product analytics for startups, mixpanel alternative, activation rate benchmark…</span></div>
-          <div><span class="k">💬</span><span><b>Communities:</b> r/SaaS, r/startups, r/ProductManagement, Indie Hackers</span></div>
-          <div><span class="k">📈</span><span><b>Channel plan:</b> SEO &amp; GEO <span style="color:var(--ok)">HIGH</span> · Reddit <span style="color:var(--ok)">HIGH</span> · LinkedIn <span style="color:var(--warn)">MED</span> · X <span style="color:var(--dim)">LOW</span></span></div>
-          <div><span class="k">🗓</span><span><b>Day 1:</b> fix 3 SEO issues · <b>Day 2:</b> publish llms.txt · <b>Day 3:</b> first article…</span></div>
+    <div class="docs reveal">
+      <div class="docs-nav" role="tablist">
+        <button class="dtab on" data-d="d1">Product Information<small>product-information.md</small></button>
+        <button class="dtab" data-d="d2">Marketing Strategy<small>marketing-strategy.md</small></button>
+        <button class="dtab" data-d="d3">Competitor Analysis<small>competitor-analysis.md</small></button>
+        <button class="dtab" data-d="d4">Brand Voice<small>brand-voice.md</small></button>
+        <button class="dtab" data-d="d5">Content Strategy<small>content-strategy.md</small></button>
+      </div>
+      <div>
+        <div class="dpane on" id="d1">
+          <div class="dbar"><span>product-information.md</span><span>Generated today · Sources: 6 pages of acme.com</span></div>
+          <h3>Product Information — Acme</h3>
+          <dl class="kv">
+            <dt>What it does</dt><dd>Shows SaaS teams where users drop off and what drives activation.</dd>
+            <dt>Category</dt><dd>Product analytics</dd>
+            <dt>Target customers</dt><dd>Seed to Series A SaaS teams without a data engineer</dd>
+            <dt>Business model</dt><dd>Freemium: free up to 10k events, then usage-based</dd>
+            <dt>Key features</dt><dd>Funnels · Activation tracking · Session replays · 5-minute setup</dd>
+            <dt>Primary CTA</dt><dd>“Start free, no credit card”</dd>
+          </dl>
+        </div>
+        <div class="dpane" id="d2">
+          <div class="dbar"><span>marketing-strategy.md</span><span>Read by every agent</span></div>
+          <h3>Marketing Strategy</h3>
+          <h4>Positioning</h4><p>For early-stage SaaS teams who need answers, not dashboards: the analytics tool you can set up before lunch.</p>
+          <h4>Personas</h4><ul><li><b>Technical founder:</b> no time, hates bloated tools</li><li><b>First PM:</b> must prove activation is improving</li><li><b>Growth marketer:</b> needs funnel data without SQL</li></ul>
+          <h4>Channel plan</h4><ul><li>SEO &amp; GEO: <b>high</b>, buyers search “mixpanel alternative”</li><li>Reddit: <b>high</b>, r/SaaS asks this weekly</li><li>LinkedIn: <b>medium</b>, founder-led stories</li></ul>
+        </div>
+        <div class="dpane" id="d3">
+          <div class="dbar"><span>competitor-analysis.md</span><span>4 competitors scanned</span></div>
+          <h3>Competitor Analysis</h3>
+          <h4>Mixpanel</h4><ul><li>Strength: brand, depth of features</li><li>Weakness: complex setup, pricey at scale</li><li><b>How we win:</b> 5-minute setup and an opinionated activation view</li></ul>
+          <h4>PostHog</h4><ul><li>Strength: open source, all-in-one</li><li>Weakness: built for engineers</li><li><b>How we win:</b> answers for non-technical founders and PMs</li></ul>
+        </div>
+        <div class="dpane" id="d4">
+          <div class="dbar"><span>brand-voice.md</span><span>Applied to every draft</span></div>
+          <h3>Brand Voice</h3>
+          <h4>Personality</h4><p>A sharp, friendly operator who has been there. Practical, never preachy.</p>
+          <h4>Do</h4><ul><li>Lead with a real number or a story</li><li>Use short sentences and plain words</li></ul>
+          <h4>Don’t</h4><ul><li>Say “revolutionary”, “synergy” or “leverage”</li><li>Bash competitors by name in community posts</li></ul>
+        </div>
+        <div class="dpane" id="d5">
+          <div class="dbar"><span>content-strategy.md</span><span>Feeds the Writer, X, LinkedIn &amp; Reddit agents</span></div>
+          <h3>Content Strategy</h3>
+          <h4>Pillars</h4><ul><li>Activation &amp; onboarding</li><li>Metrics that matter early</li><li>Founder lessons</li></ul>
+          <h4>This week</h4><ul><li><b>Blog:</b> “Activation rate benchmarks for SaaS (2026)”</li><li><b>LinkedIn:</b> “4,000 signups, 31 active users” story</li><li><b>Reddit:</b> reply to drop-off questions in r/startups</li></ul>
         </div>
       </div>
-      <div class="pane" id="t2">
-        <div class="meta"><span class="tag">Reddit · r/startups</span><span class="tag pending">pending</span><span style="color:var(--dim)">86 upvotes · 41 comments · 3h ago</span></div>
-        <h4>Reply: “How do you figure out why users drop off after signup?”</h4>
-        <div class="ctx">💡 Why this thread: an early-stage founder describing exactly the activation problem Acme solves.</div>
-        <div class="out">Had the same problem last year. What fixed it for us was way simpler than we expected:
+    </div>
+    <div class="handoff reveal"><span class="label" style="margin-right:6px">The handoff →</span><span class="f">product-information.md</span><span class="f">marketing-strategy.md</span><span class="f">competitor-analysis.md</span><span class="f">brand-voice.md</span><span class="f">content-strategy.md</span></div>
+  </section>
 
-1. Define ONE activation event (for us: “created first dashboard”)
-2. Measure time-to-activation, not just whether it happened
-3. Watch 10 session recordings of people who didn’t activate. The pattern jumps out fast.
+  <!-- STEP 2 -->
+  <section class="sec pad" id="agents">
+    <div class="head reveal">
+      <div class="label">Step 2 — Execution</div>
+      <h2>Every agent executes the plan, channel by channel.</h2>
+      <p>All drafted from the same documents, so nothing drifts off-message. You stay in control with one approval queue.</p>
+    </div>
+    <div class="agrid reveal">
+      <div class="ag"><span class="n">01</span><i class="ic" style="background:#16a34a">G</i><h3>SEO Agent</h3><p>Audits your site every day and writes the exact fixes: titles, meta tags, schema, sitemaps.</p><span class="st">● Live</span></div>
+      <div class="ag"><span class="n">02</span><i class="ic" style="background:#7c3aed">✦</i><h3>GEO Agent</h3><p>Gets you cited by ChatGPT, Claude, Gemini and Perplexity with AI-ready FAQs and llms.txt.</p><span class="st">● Live</span></div>
+      <div class="ag"><span class="n">03</span><i class="ic" style="background:#334155">✍</i><h3>Writer Agent</h3><p>Long-form articles for keywords with real buying intent, in your brand voice.</p><span class="st">● Live</span></div>
+      <div class="ag"><span class="n">04</span><i class="ic" style="background:#ff4500">r</i><h3>Reddit Agent</h3><p>Finds threads where people ask for what you sell and drafts helpful, transparent replies.</p><span class="st">● Live</span></div>
+      <div class="ag"><span class="n">05</span><i class="ic" style="background:#ff6600">Y</i><h3>Hacker News Agent</h3><p>Joins relevant discussions and prepares your Show HN launch.</p><span class="st">● Live</span></div>
+      <div class="ag"><span class="n">06</span><i class="ic" style="background:#0a66c2">in</i><h3>LinkedIn Agent</h3><p>Founder-led posts: stories, how-tos and lessons, with hooks that stop the scroll.</p><span class="st">● Live</span></div>
+      <div class="ag"><span class="n">07</span><i class="ic" style="background:#111">𝕏</i><h3>X Agent</h3><p>Daily posts and threads built around your content pillars.</p><span class="st">● Live</span></div>
+      <div class="ag"><span class="n">08</span><i class="ic" style="background:#0ea5e9">&lt;/&gt;</i><h3>Strategy Agent</h3><p>Keeps the five documents up to date as your product, market and results change.</p><span class="st">● Live</span></div>
+    </div>
 
-Most drop-off we found was an empty state that didn’t tell people what to do next.
+    <div class="ex reveal">
+      <div class="card"><div class="top"><i class="ic" style="background:#ff4500">r</i>Reddit · r/startups<span class="pill">PENDING</span></div><h4>“How do you figure out why users drop off after signup?”</h4><div class="why">Why this thread: 86 upvotes, exactly the problem Acme solves</div><div class="body">Had the same problem. What fixed it: define ONE activation event, measure time-to-activation, then watch 10 recordings of people who didn’t activate. The pattern jumps out fast.
 
-(Disclosure: I work on Acme, a product analytics tool, but you can do all of the above with a spreadsheet.)</div>
-        <div class="acts"><span class="btn btn-primary btn-sm">✓ Approve</span><span class="btn btn-ghost btn-sm">Edit</span><span class="btn btn-ghost btn-sm">Open thread ↗</span></div>
-      </div>
-      <div class="pane" id="t3">
-        <div class="meta"><span class="tag">LinkedIn</span><span class="tag pending">pending</span><span style="color:var(--dim)">Founder voice · Story post</span></div>
-        <h4>“We had 4,000 signups and 31 active users.”</h4>
-        <div class="out">We had 4,000 signups and 31 active users.
-
-For 3 months I thought we had a marketing problem.
+(Disclosure: I work on Acme, but you can do this with a spreadsheet.)</div><div class="acts"><span class="btn btn-dark btn-sm">Approve</span><span class="btn btn-line btn-sm">Edit</span><span class="btn btn-line btn-sm">Skip</span></div></div>
+      <div class="card"><div class="top"><i class="ic" style="background:#0a66c2">in</i>LinkedIn · Founder story<span class="pill">PENDING</span></div><h4>“We had 4,000 signups and 31 active users.”</h4><div class="why">From content-strategy.md → Founder lessons</div><div class="body">For 3 months I thought we had a marketing problem.
 We had an onboarding problem.
 
-Here’s what we changed:
 → Cut signup from 6 fields to 2
 → Replaced the empty dashboard with a live sample
-→ Sent one email 10 minutes in, not 24 hours later
 
-Activation went from 0.8% to 11% in 5 weeks.
+Activation: 0.8% → 11% in 5 weeks.</div><div class="acts"><span class="btn btn-dark btn-sm">Approve</span><span class="btn btn-line btn-sm">Edit</span><span class="btn btn-line btn-sm">Skip</span></div></div>
+      <div class="card"><div class="top"><i class="ic" style="background:#16a34a">G</i>SEO · Site fix<span class="pill">PENDING</span></div><h4>Missing meta description on homepage</h4><div class="why">Score 64 → 79 after today’s 3 fixes</div><div class="body mono" style="font-size:12.5px;background:var(--soft);border:1px solid var(--line);border-radius:8px;padding:10px">&lt;meta name="description" content="See why users drop off and what makes them stay. Set up in 5 minutes."&gt;</div><div class="acts"><span class="btn btn-dark btn-sm">Approve</span><span class="btn btn-line btn-sm">Copy</span></div></div>
+    </div>
+  </section>
 
-The lesson: before you pour more water in, check the bucket for holes.
-
-What’s the one metric you wish you’d tracked earlier?</div>
-        <div class="acts"><span class="btn btn-primary btn-sm">✓ Approve</span><span class="btn btn-ghost btn-sm">Edit</span><span class="btn btn-ghost btn-sm">Copy</span></div>
+  <!-- STEP 3 -->
+  <section class="sec pad" id="revenue">
+    <div class="rev">
+      <div class="head reveal">
+        <div class="label">Step 3 — Revenue · Coming next</div>
+        <h2>Other AI CMOs stop at attention. Pulsora follows through to revenue.</h2>
+        <p>The same agents that find people asking for your product will turn them into named leads, reach out personally, call the warm ones and book the meeting. Every deal traces back to the post that started it.</p>
+        <div style="display:flex;gap:10px;margin-top:28px;flex-wrap:wrap"><a href="#start" class="btn btn-dark">Get early access</a><a href="#pricing" class="btn btn-line">See pricing</a></div>
       </div>
-      <div class="pane" id="t4">
-        <div class="meta"><span class="tag">SEO Auditor</span><span style="color:var(--dim)">14 checks · acme.com</span></div>
-        <h4>Website score: <span style="color:var(--warn)">64</span>/100</h4>
-        <div class="checks">
-          <div><span class="k">✅</span><span>HTTPS, mobile viewport, single H1, robots.txt</span></div>
-          <div><span class="k">⚠️</span><span>Title too short: “Acme” (4 chars, aim for 25–65)</span></div>
-          <div><span class="k">❌</span><span>No meta description</span></div>
-          <div><span class="k">❌</span><span>No structured data (JSON-LD)</span></div>
-          <div><span class="k">⚠️</span><span>No llms.txt, so AI assistants can’t summarise you</span></div>
-        </div>
-        <div class="ctx" style="margin-top:16px">Fix, ready to paste into your &lt;head&gt;:</div>
-<pre class="code">&lt;title&gt;Acme — Product Analytics for Early-Stage SaaS&lt;/title&gt;
-&lt;meta name="description" content="See why users drop off and
-what makes them stay. Set up in 5 minutes, no data engineer."&gt;</pre>
-      </div>
-      <div class="pane" id="t5">
-        <div class="meta"><span class="tag">GEO · AI Search</span><span style="color:var(--dim)">Optimised for ChatGPT, Claude, Gemini, Perplexity</span></div>
-        <h4>Questions your buyers ask AI assistants</h4>
-        <div class="checks">
-          <div><span class="k">❓</span><span>“What’s a good Mixpanel alternative for a small startup?”</span></div>
-          <div><span class="k">❓</span><span>“How do I measure user activation in a SaaS product?”</span></div>
-          <div><span class="k">❓</span><span>“Which analytics tools work without a data engineer?”</span></div>
-        </div>
-        <div class="ctx" style="margin-top:16px">Generated <b>llms.txt</b>, ready to upload to acme.com/llms.txt:</div>
-<pre class="code"># Acme Analytics
-&gt; Product analytics for early-stage SaaS teams. Shows where
-&gt; users drop off and what drives activation, no data engineer needed.
-
-## Key pages
-- [Pricing](https://acme.com/pricing): Free up to 10k events
-- [Activation guide](https://acme.com/blog/activation)</pre>
+      <div class="flow reveal">
+        <div class="fstep live"><i class="ic" style="background:#ff4500">r</i><div><b>Signal</b><small>“Looking for a Mixpanel alternative” on r/SaaS</small></div><span class="tag">● Live</span></div>
+        <div class="arrow">↓</div>
+        <div class="fstep"><i class="ic" style="background:#db2777">◉</i><div><b>Lead Hunter</b><small>Identifies the person, role and company</small></div><span class="tag">Phase 3</span></div>
+        <div class="arrow">↓</div>
+        <div class="fstep"><i class="ic" style="background:#0284c7">✉</i><div><b>Outreach Agent</b><small>Personal email that references their post</small></div><span class="tag">Phase 3</span></div>
+        <div class="arrow">↓</div>
+        <div class="fstep"><i class="ic" style="background:#d97706">☎</i><div><b>AI Voice Caller</b><small>Calls opted-in leads, qualifies, books a demo</small></div><span class="tag">Phase 4</span></div>
+        <div class="arrow">↓</div>
+        <div class="fstep"><i class="ic" style="background:#059669">$</i><div><b>Revenue Tracker</b><small>Deal closed, credited to the original thread</small></div><span class="tag">Phase 4</span></div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- COMPARE -->
-<section id="compare">
-  <div class="wrap center reveal">
-    <span class="eyebrow">Why Pulsora</span>
-    <h2 class="title">CMO-level thinking.<br><span class="serif grad">Software-level price.</span></h2>
-  </div>
-  <div class="wrap reveal">
-    <div class="table-wrap">
+  <!-- COMPARE -->
+  <section class="sec pad" id="compare">
+    <div class="head c reveal">
+      <div class="label">Why Pulsora</div>
+      <h2>CMO-level thinking at software-level cost.</h2>
+    </div>
+    <div class="tbl reveal">
       <table>
-        <thead><tr><th></th><th class="us">Pulsora</th><th>Marketing agency</th><th>In-house hire</th><th>AI writing tools</th></tr></thead>
+        <thead><tr><th></th><th class="us">Pulsora</th><th>Agency</th><th>In-house hire</th><th>AI writing tools</th></tr></thead>
         <tbody>
-          <tr><td>Monthly cost</td><td class="us"><b>From $49</b></td><td>$5,000–10,000</td><td>$8,000+</td><td>$20–100</td></tr>
-          <tr><td>Time to first results</td><td class="us"><b>Minutes</b></td><td>4–8 weeks</td><td>2–3 months</td><td>Instant</td></tr>
-          <tr><td>Builds the strategy</td><td class="us"><span class="y">✓</span></td><td><span class="y">✓</span></td><td><span class="y">✓</span></td><td><span class="n">—</span></td></tr>
-          <tr><td>Executes on 8+ channels daily</td><td class="us"><span class="y">✓</span></td><td><span class="n">Partly</span></td><td><span class="n">Partly</span></td><td><span class="n">—</span></td></tr>
-          <tr><td>Finds live buying conversations</td><td class="us"><span class="y">✓</span></td><td><span class="n">—</span></td><td><span class="n">—</span></td><td><span class="n">—</span></td></tr>
-          <tr><td>AI-search (GEO) optimisation</td><td class="us"><span class="y">✓</span></td><td><span class="n">Rarely</span></td><td><span class="n">Rarely</span></td><td><span class="n">—</span></td></tr>
-          <tr><td>Leads, outreach &amp; AI calling</td><td class="us"><span style="color:var(--brand2);font-weight:600">Roadmap</span></td><td><span class="n">Extra cost</span></td><td><span class="n">Extra hires</span></td><td><span class="n">—</span></td></tr>
+          <tr><td>Monthly cost</td><td class="us">From $49</td><td>$5,000–10,000</td><td>$8,000+</td><td>$20–100</td></tr>
+          <tr><td>Time to first results</td><td class="us">Minutes</td><td>4–8 weeks</td><td>2–3 months</td><td>Instant</td></tr>
+          <tr><td>Writes the strategy first</td><td class="us"><span class="y">✓</span></td><td><span class="y">✓</span></td><td><span class="y">✓</span></td><td><span class="n">—</span></td></tr>
+          <tr><td>Executes on 8 channels daily</td><td class="us"><span class="y">✓</span></td><td><span class="n">Partly</span></td><td><span class="n">Partly</span></td><td><span class="n">—</span></td></tr>
+          <tr><td>AI search (GEO) optimisation</td><td class="us"><span class="y">✓</span></td><td><span class="n">Rarely</span></td><td><span class="n">Rarely</span></td><td><span class="n">—</span></td></tr>
+          <tr><td>Leads, outreach &amp; AI calls</td><td class="us">Roadmap</td><td><span class="n">Extra cost</span></td><td><span class="n">Extra hires</span></td><td><span class="n">—</span></td></tr>
         </tbody>
       </table>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- VISION -->
-<section id="vision" style="background:linear-gradient(180deg,transparent,var(--bg2) 30%,transparent)">
-  <div class="wrap center reveal">
-    <span class="eyebrow">The vision</span>
-    <h2 class="title">Today: marketing on autopilot.<br><span class="serif grad">Tomorrow: revenue on autopilot.</span></h2>
-    <p class="lead">Other AI marketing tools stop at attention. Pulsora is built to follow the customer all the way: from the first post they see to the meeting on your calendar and the deal in your pipeline.</p>
-  </div>
-  <div class="wrap road">
-    <div class="phase now reveal"><div class="when">● Phase 1 · Live MVP</div><h3>AI Marketing Team</h3><ul><li>Website → strategy</li><li>SEO &amp; AI-search audit</li><li>6 content &amp; community agents</li><li>Approval queue</li></ul></div>
-    <div class="phase reveal"><div class="when">Phase 2</div><h3>Autopilot &amp; Publishing</h3><ul><li>Daily scheduled agents</li><li>1-click publish to X, LinkedIn, blog</li><li>Performance analytics</li><li>Learns what converts</li></ul></div>
-    <div class="phase reveal"><div class="when">Phase 3</div><h3>Leads &amp; Outreach</h3><ul><li>Intent signals → named leads</li><li>Contact enrichment</li><li>Personalised email sequences</li><li>Built-in CRM</li></ul></div>
-    <div class="phase reveal"><div class="when">Phase 4</div><h3>AI Sales Calls &amp; Revenue</h3><ul><li>AI voice agent for warm leads</li><li>Meeting booking</li><li>Revenue attribution</li><li>Fully autonomous CMO</li></ul></div>
-  </div>
-</section>
-
-<!-- PRICING -->
-<section id="pricing">
-  <div class="wrap center reveal">
-    <span class="eyebrow">Pricing</span>
-    <h2 class="title">Less than one day<br>of an agency. <span class="serif grad">Every month.</span></h2>
-    <p class="lead">Early-access pricing. Start free, upgrade when your agents are pulling their weight.</p>
-  </div>
-  <div class="wrap prices">
-    <div class="price reveal"><h3>Starter</h3><div class="amt">$0</div><div class="for">Try your AI CMO</div><ul><li>Full marketing strategy</li><li>Website SEO &amp; GEO audit</li><li>20 agent drafts / month</li><li>1 website</li></ul><a href="#start" class="btn btn-ghost">Start free</a></div>
-    <div class="price pop reveal"><h3>Growth</h3><div class="amt">$49<small>/month</small></div><div class="for">For founders &amp; small teams</div><ul><li>All 8 agents, unlimited runs</li><li>Daily automatic agent runs</li><li>Reddit &amp; HN opportunity alerts</li><li>Weekly CMO report</li><li>Priority access to Leads (Phase 3)</li></ul><a href="#start" class="btn btn-primary">Get early access</a></div>
-    <div class="price reveal"><h3>Agency</h3><div class="amt">$199<small>/month</small></div><div class="for">For agencies &amp; multi-brand teams</div><ul><li>Up to 10 brands</li><li>Team seats &amp; approvals</li><li>White-label reports</li><li>API access</li></ul><a href="#start" class="btn btn-ghost">Talk to us</a></div>
-  </div>
-</section>
-
-<!-- FAQ -->
-<section id="faq" style="padding-top:40px">
-  <div class="wrap center reveal">
-    <span class="eyebrow">FAQ</span>
-    <h2 class="title">Questions, answered.</h2>
-  </div>
-  <div class="wrap faq reveal">
-    <details><summary>Does Pulsora post anything without my approval?</summary><p>No. Every article, post and reply lands in your approval queue first. You can edit, approve or reject it. Full autopilot will be an opt-in setting per channel.</p></details>
-    <details><summary>How does it understand my business?</summary><p>It crawls your website’s key pages (home, product, pricing, about) and combines that with any goals you type in. From that it builds personas, positioning, keywords and a channel plan, which you can review and refine.</p></details>
-    <details><summary>What is GEO, and why does it matter?</summary><p>Generative Engine Optimisation means making sure AI assistants like ChatGPT, Claude, Gemini and Perplexity understand and recommend your product. More buyers now ask an AI before they search Google. Pulsora writes the FAQs, structured data and llms.txt these engines read.</p></details>
-    <details><summary>Isn’t AI-written community content spammy?</summary><p>Not the way Pulsora does it. Community agents only reply where you can genuinely help, answer the question first, follow each community’s tone, and always disclose your affiliation. A human approves every reply.</p></details>
-    <details><summary>Which AI models power Pulsora?</summary><p>Pulsora runs on frontier models from Anthropic (Claude) with structured outputs, so every draft follows a consistent format your team can trust.</p></details>
-    <details><summary>When will leads, outreach and AI calling arrive?</summary><p>They are next on our roadmap (Phases 3 and 4). Early-access customers get them first, and help shape them.</p></details>
-  </div>
-</section>
-
-<!-- CTA -->
-<section style="padding-top:60px">
-  <div class="wrap">
-    <div class="cta-box reveal">
-      <h2>Stop doing marketing.<br><span class="serif grad">Start approving it.</span></h2>
-      <p class="lead" style="margin:18px auto 0">Get your free AI-built marketing strategy and website audit in two minutes.</p>
-      <form class="url-form" onsubmit="return startDemo(event)" style="margin-top:30px">
-        <input type="text" placeholder="yourcompany.com" aria-label="Your website" required>
-        <button class="btn btn-primary" type="submit">Hire my AI CMO →</button>
-      </form>
+  <!-- PRICING -->
+  <section class="sec pad" id="pricing">
+    <div class="head c reveal">
+      <div class="label">Pricing</div>
+      <h2>Less than one day of an agency. Every month.</h2>
+      <p>Early-access pricing. Start free; upgrade when your agents are pulling their weight.</p>
     </div>
-  </div>
-</section>
+    <div class="prices reveal">
+      <div class="price"><div class="lbl"><b>Starter</b></div><div class="amt">$0</div><div class="for">Meet your AI CMO</div><ul><li>5 strategy documents</li><li>Website SEO &amp; GEO audit</li><li>20 agent drafts / month</li><li>1 website</li></ul><a href="#start" class="btn btn-line">Start free</a></div>
+      <div class="price pop"><div class="lbl"><b>Growth</b><span>Popular</span></div><div class="amt">$49<small> /month</small></div><div class="for">For founders &amp; small teams</div><ul><li>All 8 agents, unlimited drafts</li><li>Daily automatic runs</li><li>Reddit &amp; HN opportunity alerts</li><li>Weekly CMO report</li><li>First access to Leads &amp; Outreach</li></ul><a href="#start" class="btn btn-dark">Get early access</a></div>
+      <div class="price"><div class="lbl"><b>Agency</b></div><div class="amt">$199<small> /month</small></div><div class="for">For agencies &amp; multi-brand teams</div><ul><li>Up to 10 brands</li><li>Team seats &amp; approvals</li><li>White-label reports</li><li>API access</li></ul><a href="#start" class="btn btn-line">Talk to us</a></div>
+    </div>
+  </section>
 
+  <!-- FAQ -->
+  <section class="sec pad" id="faq">
+    <div class="head c reveal"><div class="label">FAQ</div><h2>Questions, answered.</h2></div>
+    <div class="faq reveal">
+      <details><summary>Does Pulsora publish anything without my approval?</summary><p>No. Every article, post, reply and site fix goes to your approval queue first. You can edit, approve or skip it. Full autopilot will be an opt-in setting per channel.</p></details>
+      <details><summary>What are the five strategy documents?</summary><p>Product Information, Marketing Strategy, Competitor Analysis, Brand Voice and Content Strategy. Pulsora writes them from your website and goals before any agent starts. Every agent reads them, so all your channels say the same thing in the same voice. You can edit them at any time.</p></details>
+      <details><summary>What is GEO?</summary><p>Generative Engine Optimisation: making sure AI assistants like ChatGPT, Claude, Gemini and Perplexity understand and recommend your product. More buyers now ask an AI before they search Google.</p></details>
+      <details><summary>Isn’t AI community content spammy?</summary><p>Not the way Pulsora does it. Community agents only reply where you can genuinely help, answer the question first, match each community’s tone and always disclose your affiliation. A human approves every reply.</p></details>
+      <details><summary>How is Pulsora different from other AI marketing tools?</summary><p>Most stop at content and attention. Pulsora is built to follow the customer to revenue: buying signals become named leads, then personal outreach, AI calls with opted-in leads, meetings and tracked deals (Phases 3–4 of our roadmap).</p></details>
+      <details><summary>Which AI powers Pulsora?</summary><p>Frontier models from Anthropic (Claude), with structured outputs, so every draft follows a consistent format your team can trust.</p></details>
+    </div>
+  </section>
+</div>
+
+<section class="cta">
+  <div class="label">Your AI CMO is ready</div>
+  <h2>Stop doing marketing.<br>Start approving it.</h2>
+  <p>Get your five strategy documents and a website audit in about two minutes.</p>
+  <form class="url" onsubmit="return start(event)">
+    <input type="text" placeholder="yourcompany.com" aria-label="Your website" required>
+    <button class="btn btn-dark" type="submit">Start free →</button>
+  </form>
+</section>
 <footer>
-  <div class="wrap">
-    <a href="#" class="logo"><span class="logo-mark"><svg width="18" height="18" viewBox="0 0 32 32"><path d="M3 17h6l3-8 6 15 3-7h8" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Pulsora</a>
-    <nav><a href="#how">How it works</a><a href="#agents">Agents</a><a href="#vision">Vision</a><a href="#pricing">Pricing</a><a href="/">Built by Dhruv</a></nav>
-    <span>© 2026 Pulsora. Your AI CMO.</span>
+  <div class="in">
+    <a href="#" class="logo"><span class="logo-mark"><svg width="16" height="16" viewBox="0 0 32 32"><path d="M3 17h6l3-8 6 15 3-7h8" stroke="#000" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Pulsora</a>
+    <nav><a href="#research">How it works</a><a href="#agents">Agents</a><a href="#revenue">Revenue</a><a href="#pricing">Pricing</a><a href="/">Built by Dhruv</a></nav>
+    <span class="mono" style="font-size:12.5px">© 2026 PULSORA</span>
   </div>
 </footer>
 
 <div class="toast" id="toast"></div>
 
 <script>
-// Live "agents working" feed in the product mock
-const feed = [
-  ["#ff4500","r","Reddit Scout","Found 4 threads in r/SaaS asking for analytics tools"],
-  ["#16a34a","G","SEO Auditor","Fixed meta description on /pricing · score 87 → 91"],
-  ["#7c3aed","✦","GEO Agent","Acme now cited by ChatGPT for “mixpanel alternative”"],
-  ["#334155","✍","Content Writer","Drafted “Activation rate benchmarks 2026” (1,420 words)"],
-  ["#0a66c2","in","LinkedIn","3 founder posts ready for review"],
-  ["#ff6600","Y","Hacker News","Show HN draft scheduled for Tue 8am PT"],
-  ["#000","𝕏","X Creator","Thread: “5 metrics we wish we tracked earlier”"],
-];
-const feedEl = document.getElementById("feed");
-let fi = 0;
-function pushFeed(){
-  const [c,i,a,t] = feed[fi++ % feed.length];
-  const d = document.createElement("div");
-  d.className = "feed-item";
-  d.innerHTML = `<i style="background:${c}">${i}</i><div><b>${a}</b><small>${t}</small></div>`;
-  feedEl.prepend(d);
-  while (feedEl.children.length > 6) feedEl.lastChild.remove();
-}
-for (let k = 0; k < 5; k++) pushFeed();
-setInterval(pushFeed, 2600);
+// Context panel: documents list
+const docNames = ["Product Information","Marketing Strategy","Competitor Analysis","Brand Voice","Content Strategy"];
+document.getElementById("ctxDocs").innerHTML = docNames.map(n =>
+  `<div class="doc"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/></svg>${n}<span class="st"></span></div>`).join("");
 
-// Demo tabs
-document.querySelectorAll(".tab").forEach(b => b.addEventListener("click", () => {
-  document.querySelectorAll(".tab").forEach(x => x.classList.toggle("on", x === b));
-  document.querySelectorAll(".pane").forEach(p => p.classList.toggle("on", p.id === b.dataset.t));
+// Today's tasks: clickable, they "complete" in the preview
+const tasks = [
+  ["#7c3aed","✦","Today’s GEO fix","Publish llms.txt","Fix",true],
+  ["#0a66c2","in","Today’s post","“We had 4,000 signups and 31 active users…”","Approve",false],
+  ["#16a34a","G","Today’s top fix","Missing meta description","Fix",false],
+  ["#ff4500","r","Today’s reply","r/startups · user drop-off thread","Reply",false],
+];
+const tEl = document.getElementById("tasks");
+function renderTasks(){
+  tEl.innerHTML = tasks.map((t,i)=>`<div class="task ${t[5]?"done":""}"><i class="ic" style="background:${t[0]}">${t[1]}</i><span class="k">${t[2]} ·</span><span class="t">${t[3]}</span>${t[5]?"":`<span class="skip">Skip</span>`}<button class="go" data-i="${i}">${t[5]?"Done ✓":t[4]}</button></div>`).join("");
+  const done = tasks.filter(t=>t[5]).length;
+  document.getElementById("bar").style.width = (done/tasks.length*100)+"%";
+  document.getElementById("progTxt").textContent = `${done} of ${tasks.length} done`;
+}
+tEl.addEventListener("click", e => { const b = e.target.closest(".go"); if (b) { tasks[b.dataset.i][5] = true; renderTasks(); } });
+renderTasks();
+
+// Strategy documents tabs
+document.querySelectorAll(".dtab").forEach(b => b.addEventListener("click", () => {
+  document.querySelectorAll(".dtab").forEach(x => x.classList.toggle("on", x === b));
+  document.querySelectorAll(".dpane").forEach(p => p.classList.toggle("on", p.id === b.dataset.d));
 }));
 
 // Reveal on scroll
-const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .12 });
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .1 });
 document.querySelectorAll(".reveal").forEach(el => io.observe(el));
 
-// Early-access form: there is no signup backend yet, so we don't claim to save anything.
-// We show the sample output instead. Wire this to a form service before launch.
-function startDemo(e){
+// There is no signup backend yet: don't claim to save anything, show the walkthrough instead.
+function start(e){
   e.preventDefault();
   const v = e.target.querySelector("input").value.trim();
   const t = document.getElementById("toast");
-  t.textContent = `Early access is opening soon${v ? " for " + v : ""}. Here’s a sample of what Pulsora builds ↓`;
+  t.textContent = `Early access is opening soon${v ? " for " + v : ""}. Here’s how Pulsora works ↓`;
   t.classList.add("show");
-  setTimeout(() => t.classList.remove("show"), 4200);
-  document.getElementById("demo").scrollIntoView({ behavior: "smooth" });
+  setTimeout(() => t.classList.remove("show"), 4000);
+  document.getElementById("research").scrollIntoView({ behavior: "smooth" });
   return false;
 }
 </script>
