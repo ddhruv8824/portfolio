@@ -130,6 +130,9 @@
     .card:hover .card-indicator { opacity: 1; transform: none; }
     @media (hover: none) { .card-indicator { opacity: 1; transform: none; } }
 
+    .card-actions { position: relative; z-index: 2; display: flex; align-items: center; flex-wrap: wrap; gap: 8px 12px; margin-top: 8px; }
+    .card-note { font-size: 13px; color: var(--muted-foreground); }
+
     /* Pills */
     .pills { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
     .pill { display: inline-flex; align-items: center; gap: 7px; height: 26px; padding: 0 10px; border-radius: 999px; background: var(--secondary); color: var(--foreground); font-size: 13px; font-weight: 500; transition: background-color .15s; }
@@ -251,6 +254,13 @@
               <li>Tracker synced with Gmail, plus DSA prep for the companies you interview with</li>
             </ul>
           </div>
+          <div class="card-actions">
+            <a class="btn btn-primary" id="invite" href="mailto:ddhruv8824@gmail.com?subject=Offerloop%20invite%20request&body=Hi%20Dhruv%2C%0A%0AI%27d%20like%20to%20join%20Offerloop.%20Please%20add%20me%20and%20send%20an%20invite%20to%20this%20email%20address.%0A%0AThanks%21" data-gmail="https://mail.google.com/mail/?view=cm&fs=1&to=ddhruv8824@gmail.com&su=Offerloop%20invite%20request&body=Hi%20Dhruv%2C%0A%0AI%27d%20like%20to%20join%20Offerloop.%20Please%20add%20me%20and%20send%20an%20invite%20to%20this%20email%20address.%0A%0AThanks%21" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12 22 3l-4 18-7-6-9-3Z"/><path d="m11 15-2 5-2-8"/><path d="m22 3-11 12"/></svg>
+              Request invite
+            </a>
+            <span class="card-note">Opens a ready-to-send email</span>
+          </div>
           <svg class="card-indicator" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10M7 17 17 7"/></svg>
         </article>
       </section>
@@ -310,6 +320,11 @@
   </footer>
 
   <script>
+    // Request invite: Gmail compose on desktop, the phone's mail app (mailto) on touch devices
+    (function () {
+      var a = document.getElementById('invite');
+      if (window.matchMedia('(pointer: fine)').matches) a.href = a.dataset.gmail;
+    })();
     document.querySelector('.theme-toggle').addEventListener('click', function () {
       var dark = document.documentElement.classList.toggle('dark');
       try { localStorage.setItem('theme', dark ? 'dark' : 'light'); } catch (e) {}
