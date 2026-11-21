@@ -151,8 +151,8 @@
     /* All-India line-art landscape behind the page: north and west on the left, east and south on the right */
     header, main, footer { position: relative; z-index: 1; }
     .india-bg { position: fixed; inset: 0; z-index: 0; display: none; pointer-events: none; color: var(--foreground); opacity: .085;
-      -webkit-mask-image: linear-gradient(transparent, #000 9%, #000 86%, transparent);
-              mask-image: linear-gradient(transparent, #000 9%, #000 86%, transparent); }
+      -webkit-mask-image: linear-gradient(transparent, #000 9%, #000 calc(var(--cut, 100vh) - 14vh), transparent var(--cut, 100vh));
+              mask-image: linear-gradient(transparent, #000 9%, #000 calc(var(--cut, 100vh) - 14vh), transparent var(--cut, 100vh)); }
     .dark .india-bg { opacity: .11; }
     @media (min-width: 1100px) { .india-bg { display: block; } }
     .india { position: absolute; top: 0; height: 100%; width: calc((100% - 704px) / 2 + 80px); }
@@ -340,6 +340,18 @@
     (function () {
       var a = document.getElementById('invite');
       if (window.matchMedia('(pointer: fine)').matches) a.href = a.dataset.gmail;
+    })();
+    // End the background landscape just above the footer's Udaipur skyline, so the two never overlap
+    (function () {
+      var bg = document.querySelector('.india-bg'), sky = document.querySelector('.skyline');
+      if (!bg || !sky) return;
+      function fade() {
+        var cut = Math.min(sky.getBoundingClientRect().top + 20, window.innerHeight);
+        bg.style.setProperty('--cut', Math.max(0, cut).toFixed(0) + 'px');
+      }
+      window.addEventListener('scroll', fade, { passive: true });
+      window.addEventListener('resize', fade);
+      fade();
     })();
     // Gentle depth: background layers drift with the mouse and scroll, nearer layers move more
     (function () {
