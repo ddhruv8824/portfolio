@@ -114,7 +114,7 @@
     .section-head p { margin-top: 8px; }
 
     /* Project card */
-    .card { position: relative; display: flex; flex-direction: column; gap: 6px; padding: 12px; border: 1px solid var(--border); border-radius: 8px; background: color-mix(in oklab, var(--card) 55%, transparent); color: var(--foreground); font-size: 14px; line-height: 20px; transition: border-color .15s, box-shadow .15s; }
+    .card { position: relative; display: flex; flex-direction: column; gap: 6px; padding: 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--card); color: var(--foreground); font-size: 14px; line-height: 20px; transition: border-color .15s, box-shadow .15s; }
     .card:hover { border-color: color-mix(in oklab, var(--ring) 45%, var(--border)); box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 12%, transparent); }
     .card-title { display: flex; align-items: center; gap: 8px; padding-right: 32px; }
     .card-icon { width: 24px; height: 24px; padding: 3px; border: 1px solid var(--border); border-radius: 4px; background: color-mix(in oklab, var(--muted) 50%, transparent); color: var(--primary); }
@@ -147,28 +147,6 @@
     .contact p + p { margin-top: 8px; }
     .xs-only { display: none; }
     @media (min-width: 480px) { .xs-only { display: inline; } }
-
-    /* Background rocket: one line-art drawing in the text colour, very faint */
-    header, main, footer { position: relative; z-index: 1; }
-    .sky { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; color: var(--foreground); }
-    .flight { position: absolute; left: 58%; top: 50%; width: 0; height: 0; animation: fly 32s linear infinite; }
-    .rocket { position: absolute; width: 132px; height: 264px; margin: -132px 0 0 -66px; opacity: .07; transform: rotate(-45deg); }
-    .dark .rocket { opacity: .1; }
-    .rocket .flame { stroke-dasharray: 3 5; animation: flame .5s linear infinite; }
-    .rocket .flame:nth-of-type(2) { animation-duration: .4s; }
-    .rocket .flame:nth-of-type(3) { animation-duration: .6s; }
-    @keyframes fly {
-      0%   { transform: translate(55vmax, 55vmax); opacity: 0; }
-      12%  { opacity: 1; }
-      88%  { opacity: 1; }
-      100% { transform: translate(-55vmax, -55vmax); opacity: 0; }
-    }
-    @keyframes flame { to { stroke-dashoffset: -8; } }
-    @media (max-width: 640px) { .rocket { width: 96px; height: 192px; margin: -96px 0 0 -48px; } }
-    @media (prefers-reduced-motion: reduce) {
-      .flight { animation: none; left: 78%; top: 62%; }
-      .rocket .flame { animation: none; }
-    }
 
     /* Udaipur skyline above the footer: City Palace, Jag Mandir, Monsoon Palace, Lake Pichola */
     .skyline { color: var(--foreground); padding: 0 16px; pointer-events: none; }
@@ -205,23 +183,6 @@
   </style>
 </head>
 <body>
-  <div class="sky" aria-hidden="true">
-    <div class="flight">
-      <svg class="rocket" viewBox="0 0 60 120" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M30 4C42 16 46 34 46 56v28H14V56C14 34 18 16 30 4Z"/>
-        <path d="M21 22h18"/>
-        <circle cx="30" cy="44" r="7"/>
-        <circle cx="30" cy="44" r="3.5"/>
-        <path d="M14 70h32"/>
-        <path d="M14 60 4 76v16l10-8M46 60l10 16v16l-10-8"/>
-        <path d="M21 84l-2 7h22l-2-7"/>
-        <path class="flame" d="M24 96v12"/>
-        <path class="flame" d="M30 96v20"/>
-        <path class="flame" d="M36 96v10"/>
-      </svg>
-    </div>
-  </div>
-
   <header>
     <div class="container">
       <a class="logo" href="/" aria-label="Home">
