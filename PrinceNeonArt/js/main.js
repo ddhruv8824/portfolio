@@ -1,75 +1,62 @@
 (function () {
-  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  // ---------- Intro: letters rise (~620ms), the full name holds 0.5s, then the screen lifts ----------
+  // ---------- Intro: name animates in, stays ~0.5s, then slides away ----------
   var intro = document.getElementById("intro");
-  var NAME_IN_MS = 620;
-  var HOLD_MS = 500;
-  document.body.style.overflow = "hidden";
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var NAME_IN_MS = 650;    // time for letters to rise and light up
+  var HOLD_MS = 500;       // how long the full name stays on screen
   setTimeout(function () {
     intro.classList.add("done");
-    document.body.style.overflow = "";
-    setTimeout(function () { intro.classList.add("gone"); }, reduce ? 0 : 650);
+    document.body.classList.remove("intro-active");
+    setTimeout(function () { intro.classList.add("gone"); }, 700);
   }, reduce ? 300 : NAME_IN_MS + HOLD_MS);
 
   document.getElementById("year").textContent = new Date().getFullYear();
 
-  // ---------- Nav menu (phones) ----------
+  // ---------- Nav ----------
+  var nav = document.getElementById("nav");
   var menuBtn = document.getElementById("menu-btn");
   var links = document.getElementById("nav-links");
-  function setMenu(open) {
-    links.classList.toggle("open", open);
-    menuBtn.setAttribute("aria-expanded", String(open));
-    menuBtn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
-  }
-  menuBtn.addEventListener("click", function () { setMenu(!links.classList.contains("open")); });
-  links.addEventListener("click", function (e) { if (e.target.tagName === "A") setMenu(false); });
+  window.addEventListener("scroll", function () {
+    nav.classList.toggle("scrolled", window.scrollY > 10);
+  }, { passive: true });
+  menuBtn.addEventListener("click", function () {
+    var open = links.classList.toggle("open");
+    menuBtn.setAttribute("aria-expanded", open);
+  });
+  links.addEventListener("click", function (e) {
+    if (e.target.tagName === "A") { links.classList.remove("open"); menuBtn.setAttribute("aria-expanded", false); }
+  });
 
-  // ---------- Gallery: twelve first, all forty on request ----------
-  var SHOW_FIRST = 12;
+  // ---------- Gallery ----------
   var photos = window.GALLERY || [];
   var grid = document.getElementById("gallery-grid");
-  var showAll = document.getElementById("show-all");
-  var cards = photos.map(function (p, i) {
-    var card = document.createElement("button");
-    card.type = "button";
-    card.className = "card" + (i >= SHOW_FIRST ? " extra" : "");
-    card.dataset.cat = p.cat || "";
-    card.setAttribute("aria-label", "Open full size: " + (p.alt || "neon sign"));
+  var figs = photos.map(function (p, i) {
+    var fig = document.createElement("figure");
+    fig.dataset.cat = p.cat || "";
     var img = document.createElement("img");
     img.src = p.src.replace("images/gallery/", "images/gallery/thumbs/");
-    img.addEventListener("error", function () { if (img.src.indexOf("/thumbs/") > -1) img.src = p.src; }, { once: true });
-    img.alt = "";
-    img.width = 720;
-    img.height = 540;
+    img.onerror = function () { img.onerror = null; img.src = p.src; };
+    img.alt = p.alt || "Prince Neon Art sign";
     img.loading = "lazy";
-    card.appendChild(img);
-    card.addEventListener("click", function () { openBox(i); });
-    grid.appendChild(card);
-    return card;
-  });
-  if (photos.length > SHOW_FIRST) {
-    grid.classList.add("collapsed");
-    showAll.textContent = "Show all " + photos.length + " signs";
-  } else {
-    showAll.hidden = true;
-  }
-  showAll.addEventListener("click", function () {
-    grid.classList.remove("collapsed");
-    showAll.hidden = true;
-    var next = cards[SHOW_FIRST];
-    if (next) next.focus();
+    var cap = document.createElement("figcaption");
+    cap.textContent = img.alt;
+    fig.appendChild(img); fig.appendChild(cap);
+    fig.addEventListener("click", function () { openBox(i); });
+    grid.appendChild(fig);
+    return fig;
   });
 
-  // ---------- Filters ----------
-  var chips = Array.prototype.slice.call(document.querySelectorAll("#filters .chip"));
+  var current = "all";
   document.getElementById("filters").addEventListener("click", function (e) {
-    var chip = e.target.closest(".chip");
-    if (!chip) return;
-    var f = chip.dataset.filter;
-    chips.forEach(function (c) { c.setAttribute("aria-pressed", String(c === chip)); });
-    if (f !== "all") { grid.classList.remove("collapsed"); showAll.hidden = true; }
-    cards.forEach(function (c) { c.hidden = !(f === "all" || c.dataset.cat === f); });
+    var btn = e.target.closest(".chip");
+    if (!btn) return;
+    document.querySelectorAll(".chip").forEach(function (c) { c.classList.toggle("active", c === btn); });
+    current = btn.dataset.filter;
+    figs.forEach(function (f) {
+      var show = current === "all" || f.dataset.cat === current;
+      f.classList.toggle("hide", !show);
+      if (show) { f.style.animation = "none"; void f.offsetWidth; f.style.animation = ""; }
+    });
   });
 
   // ---------- Lightbox ----------
@@ -77,39 +64,24 @@
   var boxImg = box.querySelector("img");
   var boxCap = box.querySelector("figcaption");
   var idx = 0;
-  var opener = null;
   function visible() {
-    return cards.map(function (_, i) { return i; }).filter(function (i) {
-      return cards[i].offsetParent !== null;
-    });
+    return photos.map(function (_, i) { return i; }).filter(function (i) { return !figs[i].classList.contains("hide"); });
   }
   function show(i) {
     idx = i;
     boxImg.src = photos[i].src;
-    boxImg.alt = photos[i].alt || "";
-    boxCap.textContent = photos[i].alt || "";
+    boxImg.alt = photos[i].alt;
+    boxCap.textContent = photos[i].alt;
   }
-  function openBox(i) {
-    opener = document.activeElement;
-    show(i);
-    box.hidden = false;
-    document.body.style.overflow = "hidden";
-    box.querySelector(".lb-close").focus();
-  }
-  function closeBox() {
-    box.hidden = true;
-    document.body.style.overflow = "";
-    if (opener) opener.focus();
-  }
+  function openBox(i) { show(i); box.hidden = false; document.body.style.overflow = "hidden"; }
+  function closeBox() { box.hidden = true; document.body.style.overflow = ""; }
   function step(d) {
-    var v = visible();
-    var pos = v.indexOf(idx);
-    if (pos < 0) pos = 0;
+    var v = visible(); var pos = v.indexOf(idx);
     show(v[(pos + d + v.length) % v.length]);
   }
   box.querySelector(".lb-close").addEventListener("click", closeBox);
-  box.querySelector(".lb-prev").addEventListener("click", function () { step(-1); });
-  box.querySelector(".lb-next").addEventListener("click", function () { step(1); });
+  box.querySelector(".lb-prev").addEventListener("click", function (e) { e.stopPropagation(); step(-1); });
+  box.querySelector(".lb-next").addEventListener("click", function (e) { e.stopPropagation(); step(1); });
   box.addEventListener("click", function (e) { if (e.target === box) closeBox(); });
   document.addEventListener("keydown", function (e) {
     if (box.hidden) return;
@@ -125,4 +97,17 @@
     if (Math.abs(dx) > 50) step(dx < 0 ? 1 : -1);
     tx = null;
   });
+
+  // ---------- Reveal on scroll ----------
+  var els = document.querySelectorAll(".reveal");
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.12 });
+    els.forEach(function (el) { io.observe(el); });
+  } else {
+    els.forEach(function (el) { el.classList.add("in"); });
+  }
 })();
