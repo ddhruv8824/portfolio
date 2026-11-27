@@ -479,3 +479,71 @@ h1, h2, h3 { font-family: Outfit, sans-serif; line-height: 1.15; margin: 0; lett
 .compare-row .us, .compare-head .us { color: var(--neon-core); }
 .cta-band { background: var(--night); }
 .cta-band::before { display: block; background: radial-gradient(circle, rgba(255, 186, 104, .10), transparent 65%); }
+
+/* ---------- Udaipur skyline line art (City Palace on Lake Pichola) ---------- */
+.skyline {
+  width: 100%; aspect-ratio: 1200 / 220; margin: 0 auto; pointer-events: none;
+  -webkit-mask: url("../images/udaipur-skyline.svg") no-repeat center bottom / 100% auto;
+          mask: url("../images/udaipur-skyline.svg") no-repeat center bottom / 100% auto;
+}
+/* top of the page: a faint watermark behind the headline and photos */
+.hero { position: relative; }
+.hero > .container { position: relative; z-index: 1; }
+.skyline--hero { position: absolute; left: 0; right: 0; bottom: 0; max-width: 1400px; background: var(--ink); opacity: .07; z-index: 0; }
+/* dark contact band: the skyline as a soft warm-white neon sign */
+.cta-band { padding-bottom: 210px; }
+.skyline-glow {
+  position: absolute; left: 0; right: 0; bottom: 18px; pointer-events: none; opacity: .5;
+  filter: drop-shadow(0 0 2px rgba(255, 200, 130, .8)) drop-shadow(0 0 10px rgba(255, 186, 104, .35));
+}
+.skyline--neon { max-width: 900px; background: var(--neon-core); }
+@media (max-width: 760px) {
+  .cta-band { padding-bottom: 130px; }
+  .skyline-glow { bottom: 12px; }
+}
+/* give the hero skyline its own space below the content */
+.hero { padding-bottom: 230px; }
+.skyline--hero { max-width: 1100px; opacity: .09; bottom: 16px; }
+@media (max-width: 760px) {
+  .hero { padding-bottom: 110px; }
+  .skyline--hero { opacity: .1; bottom: 8px; }
+}
+
+/* ---------- Soft gold lettering with a warm-white neon glow ----------
+   Gold for highlighted words, the warm-white glow around them like a lit tube.
+   Small labels stay plain gold (a glow blurs small text); body text stays ink. */
+:root {
+  --gold-text: #9a6a1c;       /* readable gold on white, small text */
+  --gold-lit: #c08a35;        /* larger gold on white */
+  --gold-on-dark: #f2d39b;    /* gold that reads as a lit warm-white tube on dark */
+  --warm-halo: 0 0 6px rgba(255, 226, 180, .75), 0 0 18px rgba(255, 196, 120, .38), 0 0 36px rgba(255, 186, 104, .18);
+  --warm-halo-light: 0 0 10px rgba(255, 210, 150, .55), 0 0 26px rgba(255, 190, 110, .28);
+}
+/* intro: PRINCE switches on in gold, glowing warm white */
+@keyframes lightOnWarm {
+  0%   { color: var(--neon-off); text-shadow: none; }
+  25%  { color: var(--gold-on-dark); text-shadow: var(--warm-halo); }
+  38%  { color: var(--neon-off); text-shadow: none; }
+  55%, 100% { color: var(--gold-on-dark); text-shadow: var(--warm-halo); }
+}
+@media (prefers-reduced-motion: reduce) { .intro-name span { color: var(--gold-on-dark); text-shadow: var(--warm-halo); } }
+.intro-line { background: var(--gold-on-dark); }
+.logo-mark { color: var(--gold-on-dark); text-shadow: 0 0 4px rgba(255, 220, 170, .8), 0 0 10px rgba(255, 190, 110, .4); }
+.logo-text em { color: var(--gold-text); }
+
+/* on white: gold words with a soft warm-white halo */
+.glow-word { color: var(--gold-lit); text-shadow: var(--warm-halo-light); }
+.eyebrow { color: var(--gold-text); }
+.dot { background: var(--gold-lit); box-shadow: 0 0 0 4px #f6ecda, 0 0 10px rgba(255, 196, 120, .6); }
+.hero-points li::before { color: var(--gold-text); }
+.hv-badge strong { color: var(--gold-lit); text-shadow: var(--warm-halo-light); }
+.stat strong { color: var(--gold-lit); text-shadow: var(--warm-halo-light); }
+.step-no { -webkit-text-stroke-color: var(--gold-lit); filter: drop-shadow(0 0 6px rgba(255, 196, 120, .45)); }
+
+/* on dark: gold that glows like warm-white neon */
+.planners h2, .cta-inner h2 { color: var(--gold-on-dark); text-shadow: var(--warm-halo); }
+.planners .eyebrow { color: var(--gold-on-dark); }
+.benefit h3::before { color: var(--gold-on-dark); text-shadow: 0 0 6px rgba(255, 210, 150, .8); }
+.compare-row .us, .compare-head .us { color: var(--gold-on-dark); }
+.skyline--neon { background: var(--gold-on-dark); }
+@media (max-width: 640px) { .compare-row .us::before { color: var(--gold-on-dark); } }
