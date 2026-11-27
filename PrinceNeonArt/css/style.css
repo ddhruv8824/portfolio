@@ -562,3 +562,142 @@ h1, h2, h3 { font-family: Outfit, sans-serif; line-height: 1.15; margin: 0; lett
 .planners .btn-accent:hover,
 .cta-band .btn-accent:hover { background: var(--neon-pink-hover); box-shadow: var(--pink-glow-hover); }
 .btn-accent:focus-visible { outline: 2px solid var(--neon-pink); outline-offset: 3px; }
+
+/* ---------- Design your neon (live preview, no AI) ---------- */
+.designer-grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 32px; align-items: start; }
+
+/* the wall */
+.neon-stage {
+  position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  min-height: 440px; padding: 48px 28px 64px; border-radius: 20px; overflow: hidden;
+  background:
+    radial-gradient(ellipse at 50% 45%, rgba(255, 255, 255, .04), transparent 60%),
+    repeating-linear-gradient(0deg, transparent 0 38px, rgba(255, 255, 255, .025) 38px 40px),
+    repeating-linear-gradient(90deg, transparent 0 78px, rgba(255, 255, 255, .02) 78px 80px),
+    #15130f;
+  transition: background-color .3s ease;
+}
+.neon-stage[data-wall="light"] {
+  background:
+    radial-gradient(ellipse at 50% 40%, rgba(255, 255, 255, .7), transparent 65%),
+    #e9e4da;
+}
+
+/* clear acrylic backing, like the real signs */
+.neon-acrylic { position: relative; max-width: 100%; padding: 22px 34px; border-radius: 28px; }
+.neon-stage[data-acrylic="on"] .neon-acrylic {
+  background: rgba(255, 255, 255, .035);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .16), inset 0 1px 0 rgba(255, 255, 255, .25), 0 18px 40px rgba(0, 0, 0, .35);
+}
+.neon-stage[data-wall="light"][data-acrylic="on"] .neon-acrylic {
+  background: rgba(255, 255, 255, .35);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .10), inset 0 1px 0 rgba(255, 255, 255, .8), 0 14px 30px rgba(60, 40, 20, .18);
+}
+
+/* the neon lettering */
+.neon-text {
+  margin: 0; white-space: nowrap; line-height: 1.15; text-align: center;
+  font-size: 96px; font-weight: 400;
+  color: color-mix(in srgb, var(--neon) 30%, #ffffff);
+  text-shadow:
+    0 0 1px #ffffff,
+    0 0 4px var(--neon),
+    0 0 10px var(--neon),
+    0 0 22px var(--neon),
+    0 0 44px var(--neon),
+    0 0 80px color-mix(in srgb, var(--neon) 60%, transparent);
+}
+.neon-text[data-font="sacramento"] { font-family: "Sacramento", cursive; }
+.neon-text[data-font="neonderthaw"] { font-family: "Neonderthaw", cursive; }
+.neon-text[data-font="yellowtail"] { font-family: "Yellowtail", cursive; }
+.neon-text[data-font="tilt"] { font-family: "Tilt Neon", sans-serif; letter-spacing: .02em; }
+/* in daylight the coloured tube shows, the glow is softer */
+.neon-stage[data-wall="light"] .neon-text {
+  color: color-mix(in srgb, var(--neon) 70%, #ffffff);
+  text-shadow:
+    0 0 1px color-mix(in srgb, var(--neon) 80%, #000000),
+    0 0 6px var(--neon),
+    0 0 16px color-mix(in srgb, var(--neon) 70%, transparent),
+    0 2px 6px rgba(0, 0, 0, .18);
+}
+/* switch-on flicker when anything changes */
+.neon-text.flick { animation: neonFlick .6s ease-out; }
+@keyframes neonFlick { 0% { opacity: .15; } 20% { opacity: 1; } 32% { opacity: .35; } 48% { opacity: 1; } 60% { opacity: .7; } 100% { opacity: 1; } }
+
+.neon-note {
+  position: absolute; left: 0; right: 0; bottom: 16px; padding: 0 16px; text-align: center;
+  font-size: .8rem; color: rgba(255, 255, 255, .45);
+}
+.neon-stage[data-wall="light"] .neon-note { color: rgba(0, 0, 0, .45); }
+
+/* controls */
+.designer-controls { display: flex; flex-direction: column; gap: 22px; padding: 28px; border: 1px solid var(--line); border-radius: 20px; background: #fff; }
+.ctrl { margin: 0; padding: 0; border: 0; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.ctrl > label, .ctrl > legend { font-family: Outfit, sans-serif; font-weight: 600; font-size: 1rem; padding: 0; margin-bottom: 2px; }
+.ctrl input[type="text"] {
+  min-height: 52px; padding: 0 16px; border: 1.5px solid var(--line); border-radius: 12px;
+  font: 500 1.1rem Inter, sans-serif; color: var(--ink); background: #fff;
+}
+.ctrl input[type="text"]:focus-visible { outline: 2px solid var(--neon-pink); outline-offset: 1px; border-color: transparent; }
+.check { display: inline-flex; align-items: center; gap: 8px; font-size: .92rem; color: var(--muted); cursor: pointer; }
+.check input { width: 18px; height: 18px; accent-color: var(--neon-pink); }
+.swatches { display: flex; flex-wrap: wrap; gap: 10px; }
+.swatch {
+  width: 36px; height: 36px; border-radius: 50%; border: 2px solid #fff; cursor: pointer;
+  background: var(--sw); box-shadow: 0 0 0 1px var(--line), 0 0 10px color-mix(in srgb, var(--sw) 70%, transparent);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.swatch:hover { transform: scale(1.08); }
+.swatch.is-on { box-shadow: 0 0 0 2px var(--ink), 0 0 14px var(--sw); }
+.swatch:focus-visible { outline: 2px solid var(--neon-pink); outline-offset: 3px; }
+.ctrl-value { margin: 0; font-size: .9rem; color: var(--muted); }
+.font-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.font-opt, .tgl {
+  min-height: 48px; padding: 0 12px; border: 1.5px solid var(--line); border-radius: 12px; background: #fff;
+  color: var(--ink); cursor: pointer; transition: border-color .15s ease, background-color .15s ease;
+}
+.font-opt { font-size: 1.35rem; }
+.font-opt[data-font="sacramento"] { font-family: "Sacramento", cursive; font-size: 1.6rem; }
+.font-opt[data-font="neonderthaw"] { font-family: "Neonderthaw", cursive; font-size: 1.7rem; }
+.font-opt[data-font="yellowtail"] { font-family: "Yellowtail", cursive; }
+.font-opt[data-font="tilt"] { font-family: "Tilt Neon", sans-serif; font-size: 1.1rem; }
+.font-opt:hover, .tgl:hover { border-color: var(--ink); }
+.font-opt.is-on, .tgl.is-on { border-color: var(--ink); background: var(--ink); color: #fff; }
+.font-opt:focus-visible, .tgl:focus-visible { outline: 2px solid var(--neon-pink); outline-offset: 2px; }
+.toggle-group { display: flex; gap: 8px; }
+.tgl { flex: 1; font: 600 .92rem Inter, sans-serif; }
+.designer-send { width: 100%; }
+
+@media (max-width: 980px) {
+  .designer-grid { grid-template-columns: minmax(0, 1fr); }
+  .neon-stage { min-height: 320px; }
+}
+@media (max-width: 520px) {
+  .neon-stage { min-height: 260px; padding: 36px 14px 56px; }
+  .neon-acrylic { padding: 14px 18px; border-radius: 20px; }
+  .designer-controls { padding: 20px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .neon-text.flick { animation: none; }
+  .swatch, .font-opt, .tgl, .neon-stage { transition: none; }
+}
+/* designer fixes: readable tube on the light wall, labels that fit on phones */
+.neon-stage[data-wall="light"] {
+  background: radial-gradient(ellipse at 50% 40%, rgba(255, 255, 255, .55), transparent 65%), #ddd6ca;
+}
+.neon-stage[data-wall="light"] .neon-text {
+  color: color-mix(in srgb, var(--neon) 85%, #ffffff);
+  text-shadow:
+    0 0 1px color-mix(in srgb, var(--neon) 40%, #000000),
+    0 0 1px color-mix(in srgb, var(--neon) 40%, #000000),
+    0 0 8px var(--neon),
+    0 0 18px color-mix(in srgb, var(--neon) 60%, transparent),
+    0 3px 8px rgba(0, 0, 0, .2);
+}
+.font-opt { white-space: nowrap; overflow: hidden; text-overflow: clip; }
+@media (max-width: 520px) {
+  .font-opt { font-size: 1.1rem; padding: 0 8px; }
+  .font-opt[data-font="sacramento"] { font-size: 1.3rem; }
+  .font-opt[data-font="neonderthaw"] { font-size: 1.3rem; }
+  .font-opt[data-font="tilt"] { font-size: .95rem; }
+}

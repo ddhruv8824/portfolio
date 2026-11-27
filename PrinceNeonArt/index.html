@@ -10,7 +10,7 @@
   <meta property="og:image" content="https://ddhruvvv.tech/PrinceNeonArt/images/gallery/neon-27.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&family=Sacramento&family=Neonderthaw&family=Yellowtail&family=Tilt+Neon&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/PrinceNeonArt/css/style.css">
 </head>
 <body class="intro-active">
@@ -33,6 +33,7 @@
       </a>
       <nav class="nav-links" id="nav-links">
         <a href="#work">Our Work</a>
+        <a href="#design">Try Your Name</a>
         <a href="#planners">For Planners</a>
         <a href="#services">Services</a>
         <a href="#faq">FAQ</a>
@@ -105,6 +106,75 @@
           <button class="chip" data-filter="home">Home &amp; Décor</button>
         </div>
         <div id="gallery-grid" class="gallery"></div>
+      </div>
+    </section>
+
+    <!-- Design your neon: live preview, no AI. Script fonts + CSS glow. -->
+    <section id="design" class="section designer">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">Try your name</p>
+          <h2>See your name in neon</h2>
+          <p class="muted">Type a name or a few words, pick a colour and a lettering style, and see a preview of your sign.</p>
+        </div>
+
+        <div class="designer-grid">
+          <!-- The wall with the sign -->
+          <div class="neon-stage" id="neon-stage" data-wall="dark" data-acrylic="on">
+            <div class="neon-acrylic" id="neon-acrylic">
+              <p class="neon-text" id="neon-text" data-font="sacramento" style="--neon: #ffd9a8">Your Name</p>
+            </div>
+            <span class="neon-note">Preview only. Every sign is bent by hand, so the final piece may differ slightly.</span>
+          </div>
+
+          <!-- Controls -->
+          <form class="designer-controls" id="designer" onsubmit="return false">
+            <div class="ctrl">
+              <label for="neon-input">Your text</label>
+              <input id="neon-input" type="text" maxlength="30" autocomplete="off" placeholder="Priya & Rahul" value="">
+              <label class="check"><input type="checkbox" id="neon-case" checked> Capital first letter, small letters after</label>
+            </div>
+
+            <fieldset class="ctrl">
+              <legend>Neon colour</legend>
+              <div class="swatches" id="neon-colours">
+                <button type="button" class="swatch is-on" data-colour="#ffd9a8" data-name="Warm white" style="--sw:#ffd9a8" aria-label="Warm white"></button>
+                <button type="button" class="swatch" data-colour="#f4f8ff" data-name="Cool white" style="--sw:#f4f8ff" aria-label="Cool white"></button>
+                <button type="button" class="swatch" data-colour="#ff4fc0" data-name="Pink" style="--sw:#ff4fc0" aria-label="Pink"></button>
+                <button type="button" class="swatch" data-colour="#ff2d55" data-name="Red" style="--sw:#ff2d55" aria-label="Red"></button>
+                <button type="button" class="swatch" data-colour="#ff8a1f" data-name="Orange" style="--sw:#ff8a1f" aria-label="Orange"></button>
+                <button type="button" class="swatch" data-colour="#ffd23f" data-name="Yellow" style="--sw:#ffd23f" aria-label="Yellow"></button>
+                <button type="button" class="swatch" data-colour="#3df07a" data-name="Green" style="--sw:#3df07a" aria-label="Green"></button>
+                <button type="button" class="swatch" data-colour="#4fe3ff" data-name="Ice blue" style="--sw:#4fe3ff" aria-label="Ice blue"></button>
+                <button type="button" class="swatch" data-colour="#3d7bff" data-name="Blue" style="--sw:#3d7bff" aria-label="Blue"></button>
+                <button type="button" class="swatch" data-colour="#b45cff" data-name="Purple" style="--sw:#b45cff" aria-label="Purple"></button>
+              </div>
+              <p class="ctrl-value">Colour: <strong id="neon-colour-name">Warm white</strong></p>
+            </fieldset>
+
+            <fieldset class="ctrl">
+              <legend>Lettering style</legend>
+              <div class="font-options" id="neon-fonts">
+                <button type="button" class="font-opt is-on" data-font="sacramento" data-name="Signature">Signature</button>
+                <button type="button" class="font-opt" data-font="neonderthaw" data-name="Neon script">Neon script</button>
+                <button type="button" class="font-opt" data-font="yellowtail" data-name="Bold script">Bold script</button>
+                <button type="button" class="font-opt" data-font="tilt" data-name="Classic block">Classic block</button>
+              </div>
+            </fieldset>
+
+            <fieldset class="ctrl ctrl-row">
+              <legend>Wall</legend>
+              <div class="toggle-group" id="neon-wall">
+                <button type="button" class="tgl is-on" data-wall="dark">Dark wall</button>
+                <button type="button" class="tgl" data-wall="light">Light wall</button>
+              </div>
+              <label class="check"><input type="checkbox" id="neon-acrylic-toggle" checked> Clear acrylic backing</label>
+            </fieldset>
+
+            <a class="btn btn-accent designer-send" id="neon-send" target="_blank" rel="noopener"
+               href="https://wa.me/919664001741">Send this design on WhatsApp</a>
+          </form>
+        </div>
       </div>
     </section>
 
@@ -292,5 +362,6 @@
 
   <script src="/PrinceNeonArt/js/gallery.js"></script>
   <script src="/PrinceNeonArt/js/main.js"></script>
+  <script src="/PrinceNeonArt/js/designer.js"></script>
 </body>
 </html>
