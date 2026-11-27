@@ -439,3 +439,43 @@ h1, h2, h3 { font-family: Outfit, sans-serif; line-height: 1.15; margin: 0; lett
 .planners .btn-accent:hover, .cta-band .btn-accent:hover { background: #e6e6e6; }
 .cta-band .btn-light { background: transparent; color: #ffffff; border-color: rgba(255, 255, 255, .4); }
 .cta-band .btn-light:hover { border-color: #ffffff; }
+
+/* ---------- Warm-white neon (subtle) ----------
+   Minimal black, white and grey everywhere, plus a soft warm-white tube glow
+   only where neon looks real: the intro, the logo, the hero line and the dark sections. */
+:root {
+  --neon-core: #fff6e6;
+  --neon-glow: rgba(255, 196, 120, .55);
+  --neon-glow-soft: rgba(255, 186, 104, .22);
+  --neon-off: #34302a;
+  --night: #12110f;
+}
+/* intro: a dark wall, the name switches on like a warm-white sign */
+.intro { background: var(--night); }
+.intro-name span { color: var(--neon-off); animation-name: letterUp, lightOnWarm; }
+@keyframes lightOnWarm {
+  0%   { color: var(--neon-off); text-shadow: none; }
+  25%  { color: var(--neon-core); text-shadow: 0 0 6px var(--neon-glow), 0 0 22px var(--neon-glow-soft); }
+  38%  { color: var(--neon-off); text-shadow: none; }
+  55%, 100% { color: var(--neon-core); text-shadow: 0 0 4px var(--neon-glow), 0 0 18px var(--neon-glow-soft), 0 0 42px var(--neon-glow-soft); }
+}
+.intro-line { background: var(--neon-core); height: 2px; box-shadow: 0 0 8px var(--neon-glow), 0 0 20px var(--neon-glow-soft); }
+.intro-sub { color: #a39b8f; }
+@media (prefers-reduced-motion: reduce) {
+  .intro-name span { color: var(--neon-core); text-shadow: 0 0 4px var(--neon-glow), 0 0 18px var(--neon-glow-soft); }
+}
+
+/* logo: a small lit tile */
+.logo-mark { background: var(--night); color: var(--neon-core); text-shadow: 0 0 4px var(--neon-glow), 0 0 10px var(--neon-glow-soft); }
+
+/* hero line: ink with a faint warm haze, like light behind it */
+.glow-word { color: #2b2721; text-shadow: 0 0 16px rgba(255, 180, 95, .32), 0 0 36px rgba(255, 186, 104, .16); }
+
+/* dark sections: warm-white lettering */
+.planners { background: var(--night); }
+.planners h2, .cta-inner h2 { color: var(--neon-core); text-shadow: 0 0 6px rgba(255, 200, 130, .35), 0 0 26px var(--neon-glow-soft); }
+.benefit h3::before { color: var(--neon-core); text-shadow: 0 0 6px var(--neon-glow); }
+.benefit:hover { border-color: rgba(255, 214, 160, .35); background: rgba(255, 214, 160, .04); }
+.compare-row .us, .compare-head .us { color: var(--neon-core); }
+.cta-band { background: var(--night); }
+.cta-band::before { display: block; background: radial-gradient(circle, rgba(255, 186, 104, .10), transparent 65%); }
