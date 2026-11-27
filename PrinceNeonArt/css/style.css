@@ -4,9 +4,9 @@
   --ink: #121117;
   --muted: #5f5c68;
   --line: #e7e5e0;
-  --accent: #b26b0a;        /* warm gold (text accents) */
-  --gold: #f0a93a;          /* warm-white neon glow */
-  --accent-soft: #fdf1dc;
+  --accent: #1a1a1a;        /* minimal: accents are ink */
+  --gold: #8c8c8c;          /* neutral grey for small markers */
+  --accent-soft: #f1f1ef;
   --warm: #ffb547;          /* warm-white neon glow */
   --radius: 16px;
   --shadow: 0 10px 30px rgba(18, 17, 23, 0.08);
@@ -400,3 +400,42 @@ h1, h2, h3 { font-family: Outfit, sans-serif; line-height: 1.15; margin: 0; lett
   .compare-row .us { background: none; padding-bottom: 16px; }
   .compare-row .us::before { content: "Prince Neon Art: "; color: var(--gold); }
 }
+
+/* ---------- Minimal monochrome (overrides the gold) ----------
+   Black, white and neutral greys only; the neon photos are the only colour. */
+.btn-accent, .btn-accent:hover { background: var(--ink); color: #fff; box-shadow: none; }
+.btn-accent:hover { background: #333; }
+.intro-name span { animation-name: letterUp, lightOnMono; }
+@keyframes lightOnMono { 0% { opacity: 1; } 35% { opacity: .35; } 55% { opacity: 1; } 100% { opacity: 1; color: var(--ink); } }
+.intro-line { background: var(--ink); height: 2px; }
+.eyebrow { color: #6e6e6e; }
+.dot { background: var(--ink); box-shadow: 0 0 0 4px #ececea; }
+.glow-word { color: #6e6e6e; text-shadow: none; }
+.logo-mark { box-shadow: none; }
+.logo-text em { color: #6e6e6e; }
+.hv-badge strong { color: var(--ink); }
+.strip-track span::after { color: #8c8c8c; text-shadow: none; }
+.cta-band::before { display: none; }
+.step-no { -webkit-text-stroke-color: var(--ink); }
+.planners { background: #111111; color: #f2f2f2; }
+.planners .eyebrow { color: #a8a8a8; }
+.planners .lead { color: #bdbdbd; }
+.benefit:hover { border-color: rgba(255, 255, 255, .3); background: rgba(255, 255, 255, .04); }
+.benefit h3::before { color: #8c8c8c; text-shadow: none; }
+.benefit p { color: #a8a8a8; }
+.compare-row span { color: #a8a8a8; }
+.compare-row span:first-child { color: #f2f2f2; }
+.compare-row .us { background: rgba(255, 255, 255, .05); color: #ffffff; }
+.compare-head span { color: #f2f2f2; }
+.compare-head .us { color: #ffffff; }
+@media (max-width: 640px) {
+  .compare-row span:nth-child(2)::before { color: #8c8c8c; }
+  .compare-row .us { background: none; }
+  .compare-row .us::before { color: #bdbdbd; }
+}
+@media (prefers-reduced-motion: reduce) { .intro-name span { color: var(--ink); } }
+/* buttons on the dark sections: white, so they stand out */
+.planners .btn-accent, .cta-band .btn-accent { background: #ffffff; color: var(--ink); }
+.planners .btn-accent:hover, .cta-band .btn-accent:hover { background: #e6e6e6; }
+.cta-band .btn-light { background: transparent; color: #ffffff; border-color: rgba(255, 255, 255, .4); }
+.cta-band .btn-light:hover { border-color: #ffffff; }
