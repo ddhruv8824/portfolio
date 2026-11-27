@@ -547,3 +547,18 @@ h1, h2, h3 { font-family: Outfit, sans-serif; line-height: 1.15; margin: 0; lett
 .compare-row .us, .compare-head .us { color: var(--gold-on-dark); }
 .skyline--neon { background: var(--gold-on-dark); }
 @media (max-width: 640px) { .compare-row .us::before { color: var(--gold-on-dark); } }
+
+/* ---------- Main buttons: neon pink, like the 'Together Forever' sign ---------- */
+:root {
+  --neon-pink: #e5168c;
+  --neon-pink-hover: #f0269c;
+  --pink-glow: 0 0 0 1px rgba(255, 120, 200, .35), 0 0 14px rgba(255, 40, 160, .45), 0 0 34px rgba(255, 40, 160, .22);
+  --pink-glow-hover: 0 0 0 1px rgba(255, 140, 210, .5), 0 0 18px rgba(255, 50, 170, .6), 0 0 44px rgba(255, 50, 170, .3);
+}
+.btn-accent,
+.planners .btn-accent,
+.cta-band .btn-accent { background: var(--neon-pink); color: #ffffff; box-shadow: var(--pink-glow); }
+.btn-accent:hover,
+.planners .btn-accent:hover,
+.cta-band .btn-accent:hover { background: var(--neon-pink-hover); box-shadow: var(--pink-glow-hover); }
+.btn-accent:focus-visible { outline: 2px solid var(--neon-pink); outline-offset: 3px; }
