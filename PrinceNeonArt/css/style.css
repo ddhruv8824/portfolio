@@ -92,7 +92,7 @@
 .hero { padding-block: var(--space-lg) var(--space-xl); }
 .hero-inner { display: flex; flex-direction: column; gap: var(--space-xl); height: calc(100dvh - var(--nav-height) - var(--space-lg) - var(--space-xl)); min-height: 560px; max-height: 1000px; }
 .hero-photo { flex: 1 1 0; min-height: 0; margin: 0; overflow: hidden; border-radius: var(--radius-card); background: var(--color-paper-3); }
-.hero-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 38%; outline: var(--rule-hair) solid var(--color-rule); outline-offset: -1px; }
+.hero-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; transform: scale(1.1); transform-origin: 50% 25%; outline: var(--rule-hair) solid var(--color-rule); outline-offset: -1px; }
 .hero-text { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--space-2xl); align-items: end; }
 .hero h1 { max-width: 14ch; line-height: 1; }
 .hero-side { display: flex; flex-direction: column; gap: var(--space-lg); }
